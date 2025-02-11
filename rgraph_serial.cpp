@@ -51,7 +51,7 @@ Distance distance;
 
 void build_greedy_net(); /* build Voronoi diagram */
 void build_replication_tree(); /* build replication tree on Voronoi sites */
-//void compute_ghost_points(); /* compute ghost points for each Voronoi cell */
+void compute_ghost_points(); /* compute ghost points for each Voronoi cell */
 //void build_ghost_trees(); /* build cover trees on Voronoi cells plus ghost points */
 //void build_epsilon_graph(); /* build epsilon graph */
 
@@ -67,7 +67,7 @@ std::vector<IndexVectorMap> reptree; /* replication tree */
 Index minlevel, maxlevel, root; /* minimum/maximum level of replication tree, and root point id */
 
 //TreeMap trees; /* maps Voronoi sites to their "ghost" trees */
-//IndexVectorMap treeids, cellids; /* maps net sites to point+ghost_point sets (treeids) and just point sets (cellids) */
+IndexVectorMap treeids, cellids; /* maps net sites to point+ghost_point sets (treeids) and just point sets (cellids) */
 
 //IndexVectorVector graph; /* epsilon graph */
 
@@ -104,6 +104,7 @@ int main(int argc, char *argv[])
 
     build_greedy_net();
     build_replication_tree();
+    compute_ghost_points();
 
     std::ofstream f(results_fname);
     f << std::setw(4) << results << std::endl;
@@ -249,4 +250,100 @@ void build_replication_tree()
     my_results["time"] = t;
 
     results["build_replication_tree"] = my_results;
+}
+
+void compute_ghost_points()
+{
+    json my_results;
+
+    Index n = num_points;
+
+    double t;
+
+    t = -omp_get_wtime();
+
+    for (Index p_i : net)
+    {
+        treeids.insert({p_i, {}});
+        cellids.insert({p_i, {}});
+    }
+
+    Index num_ghost_points = 0;
+
+    for (Index p = 0; p < n; ++p)
+    {
+        Index p_i = cells[p];
+
+        cellids[p_i].push_back(p);
+        treeids[p_i].push_back(p);
+
+        IndexVector neighbors;
+        range_query(neighbors, points[p], dists[p] + 2*epsilon);
+
+        for (Index p_j : neighbors)
+        {
+            if (p_i != p_j)
+            {
+                treeids[p_j].push_back(p);
+                num_ghost_points++;
+            }
+        }
+    }
+
+    t += omp_get_wtime();
+
+    fmt::print("[time={:.3f}] computed ghost points [g={}]\n", t, num_ghost_points);
+
+    my_results["num_ghost_points"] = num_ghost_points;
+    my_results["time"] = t;
+
+    results["compute_ghost_points"] = my_results;
+}
+
+Index range_query(IndexVector& neighbors, Point query, Real radius)
+{
+    using IndexPair = std::pair<Index, Index>;
+    using IndexPairVector = std::vector<IndexPair>;
+
+    IndexPairVector stack;
+    stack.emplace_back(root, maxlevel);
+
+    Index dist_comps = 0;
+
+    neighbors.clear();
+
+    while (!stack.empty())
+    {
+        Index u = stack.back().first;
+        Index l = stack.back().second;
+
+        stack.pop_back();
+
+        if (l == minlevel)
+        {
+            if (distance(points[net[u]], query) <= radius)
+            {
+                neighbors.push_back(net[u]);
+            }
+
+            dist_comps++;
+        }
+        else
+        {
+            const auto& level = reptree.at(l-minlevel-1);
+            const auto& children = level.at(u);
+
+            for (Index v : children)
+            {
+                if (distance(query, points[net[v]]) <= std::pow(covering_factor, l+1) + radius)
+                {
+                    stack.emplace_back(v, l-1);
+                }
+            }
+
+            dist_comps += children.size();
+        }
+    }
+
+    return dist_comps;
 }
