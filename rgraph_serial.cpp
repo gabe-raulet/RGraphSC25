@@ -103,6 +103,7 @@ int main(int argc, char *argv[])
     results["epsilon"] = epsilon;
 
     build_greedy_net();
+    build_replication_tree();
 
     std::ofstream f(results_fname);
     f << std::setw(4) << results << std::endl;
@@ -172,4 +173,80 @@ void build_greedy_net()
     my_results["time"] = t;
 
     results["build_greedy_net"] = my_results;
+}
+
+void build_replication_tree()
+{
+    json my_results;
+
+    double t;
+    Index verts = 0;
+
+    t = -omp_get_wtime();
+
+    minlevel = std::ceil(std::log(net_sep)/std::log(covering_factor)) - 1;
+    Index i = minlevel;
+
+    IndexSet C;
+
+    for (Index j = 0; j < net.size(); ++j)
+    {
+        C.insert(j);
+        repids.insert({net[j], j});
+    }
+
+    while (C.size() > 1)
+    {
+        reptree.emplace_back();
+        IndexVectorMap& children = reptree.back();
+
+        while (!C.empty())
+        {
+            auto it = std::min_element(C.begin(), C.end());
+            Index p = *it;
+            C.erase(it);
+
+            children.insert({p, {p}});
+            IndexSet S;
+
+            for (Index q : C)
+            {
+                if (distance(points[net[p]], points[net[q]]) <= std::pow(covering_factor, i+1))
+                {
+                    children[p].push_back(q);
+                    S.insert(q);
+                }
+            }
+
+            for (Index q : S)
+                C.erase(q);
+        }
+
+        C.clear();
+
+        for (const auto& [q, _] : children)
+            C.insert(q);
+
+        i++;
+    }
+
+    maxlevel = i;
+
+    assert((reptree.back().size() == 1));
+    auto it = reptree.back().begin();
+    root = it->first;
+
+    t += omp_get_wtime();
+
+    for (const auto& level : reptree)
+        verts += level.size();
+
+    verts += net.size();
+
+    fmt::print("[time={:.3f}] built replication tree [verts={}]\n", t, verts);
+
+    my_results["verts"] = verts;
+    my_results["time"] = t;
+
+    results["build_replication_tree"] = my_results;
 }
