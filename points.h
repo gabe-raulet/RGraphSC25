@@ -21,6 +21,9 @@ struct FloatingPointTraits
     static void read_fvecs(PointVector& points, const char *fname);
 };
 
+template <class PointTraits_>
+struct L2Distance;
+
 #include "points.hpp"
 
 #endif

@@ -42,3 +42,22 @@ void FloatingPointTraits<D>::read_fvecs(PointVector& points, const char *fname)
     is.close();
 }
 
+template <int D>
+struct L2Distance<FloatingPointTraits<D>>
+{
+    using PointTraits = FloatingPointTraits<D>;
+    using Point = typename PointTraits::Point;
+
+    float operator()(const Point& p, const Point& q) const
+    {
+        float sum = 0, delta;
+
+        for (int i = 0; i < D; ++i)
+        {
+            delta = p[i] - q[i];
+            sum += delta * delta;
+        }
+
+        return std::sqrt(sum);
+    }
+};
