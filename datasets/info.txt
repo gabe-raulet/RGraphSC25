@@ -1,0 +1,10 @@
+The datasets in the the izbicki15/small and izbicki15/large folders were curated from the paper "Faster Cover Trees" (Izbicki, Shelton, 2015).
+
+izbicki15/small/artificial40.fvecs - (10000, 40)
+izbicki15/small/corel.fvecs - (68040, 32)
+izbicki15/small/faces.fvecs - (10304, 20)
+
+izbicki15/large/covtype.fvecs - (581012, 55)
+izbicki15/large/mnist.fvecs - (70000, 784)
+izbicki15/large/tinyImages100k.fvecs - (100000, 384)
+izbicki15/large/twitter.fvecs - (583250, 78)
