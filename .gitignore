@@ -1,6 +1,7 @@
 datasets/izbicki15/large
 rgraph_serial
 rgraph_serial_*
+*.json
 *.swp
 *.out
 *.dSYM
