@@ -27,5 +27,5 @@ rgraph_serial: rgraph_serial.cpp
 	$(MPI_COMPILER) -o $@ -DDIM_SIZE=$(D) $(FLAGS) -I./ $<
 
 clean:
-	rm -rf rgraph_serial *.out *.dSYM
+	rm -rf rgraph_serial rgraph_serial_* *.out *.dSYM
 
