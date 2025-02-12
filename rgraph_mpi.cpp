@@ -329,6 +329,7 @@ void build_replication_tree()
     auto timer = comm.get_timer();
 
     Index verts = 0;
+    Index dist_comps = 0;
 
     timer.start_timer();
 
@@ -366,6 +367,8 @@ void build_replication_tree()
                 }
             }
 
+            dist_comps += C.size();
+
             for (Index q : S)
                 C.erase(q);
         }
@@ -393,9 +396,10 @@ void build_replication_tree()
 
     verts += net.size();
 
-    if (!comm.rank()) fmt::print("[time={:.3f}] built replication tree [verts={}]\n", t, verts);
+    if (!comm.rank()) fmt::print("[time={:.3f}] built replication tree [verts={},dist_comps={}]\n", t, verts, dist_comps);
 
     my_results["verts"] = verts;
+    my_results["dist_comps"] = dist_comps;
     my_results["time"] = t;
 
     results["build_replication_tree"] = my_results;
@@ -436,6 +440,10 @@ void compute_ghost_points()
     using PointRecordVector = std::vector<PointRecord>;
 
     Index n = mypoints.size();
+    Index my_dist_comps = 0;
+    Index my_num_ghost_points_sent = 0;
+    Index my_num_ghost_points_recv = 0;
+
 
     auto comm = Comm::world();
     auto timer = comm.get_timer();
@@ -445,8 +453,6 @@ void compute_ghost_points()
     std::vector<PointRecordVector> sendbufs(comm.size());
     PointRecordVector recvbuf;
 
-    Index my_num_ghost_points = 0;
-
     for (Index p = 0; p < n; ++p)
     {
         Index p_i = mycells[p];
@@ -455,7 +461,7 @@ void compute_ghost_points()
         sendbufs[dest].emplace_back(myoffset+p, p_i, false, mypoints[p]);
 
         IndexVector neighbors;
-        range_query(neighbors, mypoints[p], mydists[p] + 2*epsilon);
+        my_dist_comps += range_query(neighbors, mypoints[p], mydists[p] + 2*epsilon);
 
         for (Index p_j : neighbors)
         {
@@ -463,7 +469,7 @@ void compute_ghost_points()
             {
                 dest = cell_assignments[repids.at(p_j)];
                 sendbufs[dest].emplace_back(myoffset+p, p_j, true, mypoints[p]);
-                my_num_ghost_points++;
+                my_num_ghost_points_sent++;
             }
         }
     }
@@ -488,18 +494,36 @@ void compute_ghost_points()
             mycellids[p_i].push_back(p);
             mycellpts[p_i].push_back(pt);
         }
+        else
+        {
+            my_num_ghost_points_recv++;
+        }
     }
 
     timer.stop_timer();
     double t = timer.get_max_time();
     total_time += t;
 
-    Index num_ghost_points = 0;
-    comm.reduce(my_num_ghost_points, num_ghost_points, 0, MPI_SUM);
+    Index dist_comps, num_ghost_points;
+    IndexVector rank_dist_comps, rank_num_ghost_points_sent, rank_num_ghost_points_recv;
 
-    if (!comm.rank()) fmt::print("[time={:.3f}] computed ghost points [num_ghost_points={}]\n", t, num_ghost_points);
+    comm.gather(my_dist_comps, rank_dist_comps, 0);
+    comm.gather(my_num_ghost_points_sent, rank_num_ghost_points_sent, 0);
+    comm.gather(my_num_ghost_points_recv, rank_num_ghost_points_recv, 0);
+
+    if (!comm.rank())
+    {
+        dist_comps = std::accumulate(rank_dist_comps.begin(), rank_dist_comps.end(), static_cast<Index>(0));
+        num_ghost_points = std::accumulate(rank_num_ghost_points_sent.begin(), rank_num_ghost_points_sent.end(), static_cast<Index>(0));
+        fmt::print("[time={:.3f}] computed ghost points [num_ghost_points={},dist_comps={}]\n", t, num_ghost_points, dist_comps);
+    }
 
     my_results["num_ghost_points"] = num_ghost_points;
+    my_results["dist_comps"] = dist_comps;
+    my_results["rank_dist_comps"] = rank_dist_comps;
+    my_results["num_ghost_points"] = num_ghost_points;
+    my_results["rank_num_ghost_points_sent"] = rank_num_ghost_points_sent;
+    my_results["rank_num_ghost_points_recv"] = rank_num_ghost_points_recv;
     my_results["time"] = t;
 
     results["compute_ghost_points"] = my_results;
@@ -541,6 +565,7 @@ void build_epsilon_graph()
     json my_results;
 
     Index my_n_edges = 0;
+    Index my_dist_comps = 0;
 
     for (const auto& [p_i, V_i] : mycellids)
     {
@@ -550,7 +575,7 @@ void build_epsilon_graph()
         for (Index j = 0; j < V_i.size(); ++j)
         {
             mygraph.emplace_back();
-            T_i.range_query(P_i[j], epsilon, mygraph.back());
+            my_dist_comps += T_i.range_query(P_i[j], epsilon, mygraph.back());
             IndexSet tmp(mygraph.back().begin(), mygraph.back().end());
             mygraph.back().assign(tmp.begin(), tmp.end());
             my_n_edges += mygraph.back().size();
@@ -561,13 +586,29 @@ void build_epsilon_graph()
     double t = timer.get_max_time();
     total_time += t;
 
-    Index n_edges = 0;
-    comm.reduce(my_n_edges, n_edges, 0, MPI_SUM);
+    Index n_edges;
+    IndexVector rank_n_edges;
 
-    if (!comm.rank()) fmt::print("[time={:.3f}] built epsilon graph [density={:.3f},edges={}]\n", t, (n_edges+0.0)/totsize, n_edges);
+    comm.gather(my_n_edges, rank_n_edges, 0);
+
+    Index dist_comps;
+    IndexVector rank_dist_comps;
+
+    comm.gather(my_dist_comps, rank_dist_comps, 0);
+
+    if (!comm.rank())
+    {
+        dist_comps = std::accumulate(rank_dist_comps.begin(), rank_dist_comps.end(), static_cast<Index>(0));
+        n_edges = std::accumulate(rank_n_edges.begin(), rank_n_edges.end(), static_cast<Index>(0));
+
+        fmt::print("[time={:.3f}] built epsilon graph [density={:.3f},edges={},dist_comps={}]\n", t, (n_edges+0.0)/totsize, n_edges, dist_comps);
+    }
 
     my_results["density"] = (n_edges+0.0)/totsize;
     my_results["num_edges"] = n_edges;
+    my_results["rank_num_edges"] = rank_n_edges;
+    my_results["dist_comps"] = dist_comps;
+    my_results["rank_dist_comps"] = rank_dist_comps;
     my_results["time"] = t;
 
     results["build_epsilon_graph"] = my_results;

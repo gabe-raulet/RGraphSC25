@@ -259,6 +259,7 @@ void build_replication_tree()
 
     double t;
     Index verts = 0;
+    Index dist_comps = 0;
 
     t = -omp_get_wtime();
 
@@ -293,6 +294,8 @@ void build_replication_tree()
                 }
             }
 
+            dist_comps += C.size();
+
             for (Index q : S)
                 C.erase(q);
         }
@@ -319,9 +322,10 @@ void build_replication_tree()
 
     verts += net.size();
 
-    fmt::print("[time={:.3f}] built replication tree [verts={}]\n", t, verts);
+    fmt::print("[time={:.3f}] built replication tree [verts={},dist_comps={}]\n", t, verts, dist_comps);
 
     my_results["verts"] = verts;
+    my_results["dist_comps"] = dist_comps;
     my_results["time"] = t;
 
     results["build_replication_tree"] = my_results;
@@ -332,6 +336,7 @@ void compute_ghost_points()
     json my_results;
 
     Index n = num_points;
+    Index dist_comps = 0;
 
     double t;
 
@@ -353,7 +358,7 @@ void compute_ghost_points()
         treeids[p_i].push_back(p);
 
         IndexVector neighbors;
-        range_query(neighbors, points[p], dists[p] + 2*epsilon);
+        dist_comps += range_query(neighbors, points[p], dists[p] + 2*epsilon);
 
         for (Index p_j : neighbors)
         {
@@ -368,9 +373,10 @@ void compute_ghost_points()
     t += omp_get_wtime();
     total_time += t;
 
-    fmt::print("[time={:.3f}] computed ghost points [num_ghost_points={}]\n", t, num_ghost_points);
+    fmt::print("[time={:.3f}] computed ghost points [num_ghost_points={},dist_comps={}]\n", t, num_ghost_points, dist_comps);
 
     my_results["num_ghost_points"] = num_ghost_points;
+    my_results["dist_comps"] = dist_comps;
     my_results["time"] = t;
 
     results["compute_ghost_points"] = my_results;
@@ -412,6 +418,7 @@ void build_epsilon_graph()
     json my_results;
 
     double t;
+    Index dist_comps = 0;
 
     t = -omp_get_wtime();
 
@@ -427,7 +434,7 @@ void build_epsilon_graph()
 
         for (Index u : V_i)
         {
-            T_i.range_query(points[u], epsilon, graph[u]);
+            dist_comps += T_i.range_query(points[u], epsilon, graph[u]);
             IndexSet tmp(graph[u].begin(), graph[u].end());
             graph[u].assign(tmp.begin(), tmp.end());
             n_edges += graph[u].size();
@@ -437,10 +444,11 @@ void build_epsilon_graph()
     t += omp_get_wtime();
     total_time += t;
 
-    fmt::print("[time={:.3f}] built epsilon graph [density={:.3f},edges={}]\n", t, (n_edges+0.0)/points.size(), n_edges);
+    fmt::print("[time={:.3f}] built epsilon graph [density={:.3f},edges={},dist_comps={}]\n", t, (n_edges+0.0)/points.size(), n_edges, dist_comps);
 
     my_results["density"] = (n_edges+0.0)/points.size();
     my_results["num_edges"] = n_edges;
+    my_results["dist_comps"] = dist_comps;
     my_results["time"] = t;
 
     results["build_epsilon_graph"] = my_results;
