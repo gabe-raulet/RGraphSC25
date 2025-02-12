@@ -37,6 +37,7 @@ using RealVector = std::vector<Real>;
 using IndexMap = std::unordered_map<Index, Index>;
 using IndexSet = std::unordered_set<Index>;
 using IndexVectorMap = std::unordered_map<Index, IndexVector>;
+using IndexVectorVector = std::vector<IndexVector>;
 
 using Tree = CoverTree<PointTraits, Distance>;
 using TreeMap = std::unordered_map<Index, Tree>;
@@ -56,8 +57,8 @@ Distance distance;
 void build_greedy_net(); /* build Voronoi diagram */
 void build_replication_tree(); /* build replication tree on Voronoi sites */
 void compute_ghost_points(); /* compute ghost points for each Voronoi cell */
-//void build_ghost_trees(); /* build cover trees on Voronoi cells plus ghost points */
-//void build_epsilon_graph(); /* build epsilon graph */
+void build_ghost_trees(); /* build cover trees on Voronoi cells plus ghost points */
+void build_epsilon_graph(); /* build epsilon graph */
 
 Index range_query(IndexVector& neighbors, Point query, Real radius); /* query replication tree for intersecting Voronoi sites */
 
@@ -70,10 +71,10 @@ IndexMap repids; /* maps Voronoi sites to their slot */
 std::vector<IndexVectorMap> reptree; /* replication tree */
 Index minlevel, maxlevel, root; /* minimum/maximum level of replication tree, and root point id */
 
-//TreeMap trees; /* maps Voronoi sites to their "ghost" trees */
+TreeMap trees; /* maps Voronoi sites to their "ghost" trees */
 IndexVectorMap treeids, cellids; /* maps net sites to point+ghost_point sets (treeids) and just point sets (cellids) */
 
-//IndexVectorVector graph; /* epsilon graph */
+IndexVectorVector graph; /* epsilon graph */
 
 int main(int argc, char *argv[])
 {
@@ -109,9 +110,7 @@ int main(int argc, char *argv[])
     build_greedy_net();
     build_replication_tree();
     compute_ghost_points();
-
-    Tree tree(points);
-    tree.build(covering_factor, leaf_size);
+    build_ghost_trees();
 
     std::ofstream f(results_fname);
     f << std::setw(4) << results << std::endl;
@@ -305,6 +304,36 @@ void compute_ghost_points()
     my_results["time"] = t;
 
     results["compute_ghost_points"] = my_results;
+}
+
+void build_ghost_trees()
+{
+    json my_results;
+
+    double t;
+
+    t = -omp_get_wtime();
+
+    for (Index p_i : net)
+    {
+        PointVector pts;
+        IndexVector ids = treeids.at(p_i);
+
+        pts.reserve(ids.size());
+
+        for (Index i = 0; i < ids.size(); ++i)
+            pts.push_back(points[ids[i]]);
+
+        trees.insert({p_i, Tree(pts, ids)});
+        trees.at(p_i).build(1./covering_factor, leaf_size);
+    }
+
+    t += omp_get_wtime();
+
+    fmt::print("[time={:.3f}] computed ghost trees\n", t);
+
+    my_results["time"] = t;
+    results["build_ghost_trees"] = my_results;
 }
 
 Index range_query(IndexVector& neighbors, Point query, Real radius)
