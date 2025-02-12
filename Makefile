@@ -26,11 +26,11 @@ ifeq ($(V),1)
 FLAGS+=-DVERIFY
 endif
 
-all: rgraph_serial
+all: rgraph
 
-rgraph_serial: rgraph_serial.cpp
+rgraph: rgraph.cpp
 	$(MPI_COMPILER) -o $@ -DDIM_SIZE=$(D) $(FLAGS) -I./ $<
 
 clean:
-	rm -rf rgraph_serial rgraph_serial_* *.out *.dSYM
+	rm -rf rgraph rgraph_* *.out *.dSYM
 

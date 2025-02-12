@@ -380,8 +380,11 @@ void build_epsilon_graph()
     Index n_edges = 0;
     graph.resize(points.size());
 
-    for (const auto& [p_i, V_i] : cellids)
+    for (Index i = 0; i < num_sites; ++i)
     {
+        Index p_i = net[i];
+
+        const auto& V_i = cellids.at(p_i);
         const auto& T_i = trees.at(p_i);
 
         for (Index u : V_i)
