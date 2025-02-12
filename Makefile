@@ -1,6 +1,7 @@
 DEBUG?=0
 LOG?=0
 D?=20
+V?=0
 FLAGS=-std=c++20 -fopenmp
 
 ifeq ($(shell uname -s),Linux)
@@ -19,6 +20,10 @@ endif
 
 ifeq ($(LOG),1)
 FLAGS+=-DLOG
+endif
+
+ifeq ($(V),1)
+FLAGS+=-DVERIFY
 endif
 
 all: rgraph_serial

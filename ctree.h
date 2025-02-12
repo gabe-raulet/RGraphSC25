@@ -392,6 +392,8 @@ CoverTree<PointTraits_, Distance_>::query(const Point& query, Real radius, Index
     }
 
     if (has_globids()) std::for_each(neighbors.begin(), neighbors.end(), [&](Index& id) { id = globids[id]; });
+
+    return num_dist_comps;
 }
 
 #endif

@@ -111,10 +111,43 @@ int main(int argc, char *argv[])
     build_replication_tree();
     compute_ghost_points();
     build_ghost_trees();
+    build_epsilon_graph();
 
     std::ofstream f(results_fname);
     f << std::setw(4) << results << std::endl;
     f.close();
+
+#ifdef VERIFY
+
+    t = -omp_get_wtime();
+
+    bool correct = true;
+    Index n = graph.size();
+
+    #pragma omp parallel for
+    for (Index i = 0; i < n; ++i)
+    {
+        if (!correct) continue;
+
+        IndexVector neighbors; neighbors.reserve(graph[i].size());
+
+        for (Index j = 0; j < n; ++j)
+            if (distance(points[i], points[j]) <= epsilon)
+                neighbors.push_back(j);
+
+        if (neighbors.size() != graph[i].size() || !std::is_permutation(neighbors.begin(), neighbors.end(), graph[i].begin()))
+        {
+            #pragma omp atomic write
+            correct = false;
+        }
+    }
+
+    t += omp_get_wtime();
+    fmt::print("[time={:.3f}] epsilon graph {} verification\n", t, correct? "PASSED" : "FAILED");
+
+    results["graph_is_correct"] = correct;
+
+#endif
 
     return 0;
 }
@@ -334,6 +367,40 @@ void build_ghost_trees()
 
     my_results["time"] = t;
     results["build_ghost_trees"] = my_results;
+}
+
+void build_epsilon_graph()
+{
+    json my_results;
+
+    double t;
+
+    t = -omp_get_wtime();
+
+    Index n_edges = 0;
+    graph.resize(points.size());
+
+    for (const auto& [p_i, V_i] : cellids)
+    {
+        const auto& T_i = trees.at(p_i);
+
+        for (Index u : V_i)
+        {
+            T_i.query(points[u], epsilon, graph[u]);
+            IndexSet tmp(graph[u].begin(), graph[u].end());
+            graph[u].assign(tmp.begin(), tmp.end());
+            n_edges += graph[u].size();
+        }
+    }
+
+    t += omp_get_wtime();
+
+    fmt::print("[time={:.3f}] built epsilon graph [density={:.3f},edges={}]\n", t, (n_edges+0.0)/points.size(), n_edges);
+
+    my_results["num_edges"] = n_edges;
+    my_results["time"] = t;
+
+    results["build_epsilon_graph"] = my_results;
 }
 
 Index range_query(IndexVector& neighbors, Point query, Real radius)
