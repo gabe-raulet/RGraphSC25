@@ -161,10 +161,13 @@ int main(int argc, char *argv[])
         }
     }
 
+
     t += omp_get_wtime();
     fmt::print("[time={:.3f}] epsilon graph {} verification\n", t, correct? "PASSED" : "FAILED");
 
     results["graph_is_correct"] = correct;
+
+#endif
 
     if (results_fname)
     {
@@ -172,9 +175,6 @@ int main(int argc, char *argv[])
         f << std::setw(4) << results << std::endl;
         f.close();
     }
-
-
-#endif
 
     return 0;
 }
@@ -385,7 +385,7 @@ void build_ghost_trees()
             pts.push_back(points[ids[i]]);
 
         trees.insert({p_i, Tree(pts, ids)});
-        trees.at(p_i).build(1./covering_factor, leaf_size);
+        trees.at(p_i).build(covering_factor, leaf_size);
     }
 
     t += omp_get_wtime();
@@ -427,6 +427,7 @@ void build_epsilon_graph()
 
     fmt::print("[time={:.3f}] built epsilon graph [density={:.3f},edges={}]\n", t, (n_edges+0.0)/points.size(), n_edges);
 
+    my_results["density"] = (n_edges+0.0)/points.size();
     my_results["num_edges"] = n_edges;
     my_results["time"] = t;
 
