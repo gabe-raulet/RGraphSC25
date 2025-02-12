@@ -42,6 +42,9 @@ using IndexVectorVector = std::vector<IndexVector>;
 using Tree = CoverTree<PointTraits, Distance>;
 using TreeMap = std::unordered_map<Index, Tree>;
 
+const char *points_fname;
+const char *results_fname;
+
 PointVector points;
 Index num_points;
 Index num_sites; /* number of Voronoi sites */
@@ -81,16 +84,34 @@ int main(int argc, char *argv[])
     #pragma omp parallel
     nthreads = omp_get_num_threads();
 
-    if (argc != 5)
+    auto usage = [&] (int err)
     {
-        fprintf(stderr, "usage: %s <points> <num_sites> <epsilon> <results>\n", argv[0]);
-        return 1;
+        fprintf(stderr, "Usage: %s [options] <points> <num_sites> <epsilon>\n", argv[0]);
+        fprintf(stderr, "Options: -c FLOAT  covering factor [%.2f]\n", covering_factor);
+        fprintf(stderr, "         -l INT    leaf size [%lu]\n", (size_t)leaf_size);
+        fprintf(stderr, "         -o FILE   output results json\n");
+        fprintf(stderr, "         -h        help message\n");
+        exit(err);
+    };
+
+    int c;
+    while ((c = getopt(argc, argv, "c:l:o:h")) >= 0)
+    {
+        if      (c == 'c') covering_factor = atof(optarg);
+        else if (c == 'l') leaf_size = atoi(optarg);
+        else if (c == 'o') results_fname = optarg;
+        else if (c == 'h') usage(0);
     }
 
-    const char *points_fname = argv[1];
-    const char *results_fname = argv[4];
-    num_sites = atoi(argv[2]);
-    epsilon = atof(argv[3]);
+    if (argc - optind < 3)
+    {
+        fmt::print(stderr, "[err::{}] missing argument(s)\n", __func__);
+        usage(1);
+    }
+
+    points_fname = argv[optind++];
+    num_sites = atoi(argv[optind++]);
+    epsilon = atof(argv[optind]);
 
     double t;
 
@@ -106,16 +127,14 @@ int main(int argc, char *argv[])
     results["num_threads"] = nthreads;
     results["num_sites"] = num_sites;
     results["epsilon"] = epsilon;
+    results["covering_factor"] = covering_factor;
+    results["leaf_size"] = leaf_size;
 
     build_greedy_net();
     build_replication_tree();
     compute_ghost_points();
     build_ghost_trees();
     build_epsilon_graph();
-
-    std::ofstream f(results_fname);
-    f << std::setw(4) << results << std::endl;
-    f.close();
 
 #ifdef VERIFY
 
@@ -146,6 +165,14 @@ int main(int argc, char *argv[])
     fmt::print("[time={:.3f}] epsilon graph {} verification\n", t, correct? "PASSED" : "FAILED");
 
     results["graph_is_correct"] = correct;
+
+    if (results_fname)
+    {
+        std::ofstream f(results_fname);
+        f << std::setw(4) << results << std::endl;
+        f.close();
+    }
+
 
 #endif
 
