@@ -226,6 +226,7 @@ void build_greedy_net()
 
     Index n = mypoints.size();
     Index m = num_sites;
+    Index my_dist_comps = 0;
 
     auto comm = Comm::world();
     auto timer = comm.get_timer();
@@ -247,6 +248,7 @@ void build_greedy_net()
     for (Index p = 0; p < n; ++p)
     {
         mydists[p] = distance(netpoints.back(), mypoints[p]);
+        my_dist_comps++;
 
         if (mydists[p] > net_sep)
         {
@@ -271,6 +273,7 @@ void build_greedy_net()
         for (Index p = 0; p < n; ++p)
         {
             Real d = distance(mypoints[p], netpoints.back());
+            my_dist_comps++;
 
             if (d < mydists[p])
             {
@@ -300,9 +303,19 @@ void build_greedy_net()
     double t = timer.get_max_time();
     total_time += t;
 
-    if (!comm.rank()) fmt::print("[time={:.3f}] built r-net Voronoi diagram [sep={:.3f},num_sites={}]\n", t, net_sep, num_sites);
+    Index dist_comps;
+    IndexVector rank_dist_comps;
+    comm.gather(my_dist_comps, rank_dist_comps, 0);
+
+    if (!comm.rank())
+    {
+        dist_comps = std::accumulate(rank_dist_comps.begin(), rank_dist_comps.end(), static_cast<Index>(0));
+        fmt::print("[time={:.3f}] built r-net Voronoi diagram [sep={:.3f},num_sites={},dist_comps={}]\n", t, net_sep, num_sites, dist_comps);
+    }
 
     my_results["net_sep"] = net_sep;
+    my_results["dist_comps"] = dist_comps;
+    my_results["rank_dist_comps"] = rank_dist_comps;
     my_results["time"] = t;
 
     results["build_greedy_net"] = my_results;

@@ -193,6 +193,7 @@ void build_greedy_net()
     Index m = num_sites;
 
     double t;
+    Index dist_comps = 0;
 
     t = -omp_get_wtime();
 
@@ -207,6 +208,7 @@ void build_greedy_net()
     for (Index p = 0; p < n; ++p)
     {
         dists[p] = distance(points[net.back()], points[p]);
+        dist_comps++;
 
         if (dists[p] > net_sep)
         {
@@ -223,6 +225,7 @@ void build_greedy_net()
         for (Index p = 0; p < n; ++p)
         {
             Real d = distance(points[net.back()], points[p]);
+            dist_comps++;
 
             if (d < dists[p])
             {
@@ -241,9 +244,10 @@ void build_greedy_net()
     t += omp_get_wtime();
     total_time += t;
 
-    fmt::print("[time={:.3f}] built r-net Voronoi diagram [sep={:.3f},num_sites={}]\n", t, net_sep, m);
+    fmt::print("[time={:.3f}] built r-net Voronoi diagram [sep={:.3f},num_sites={},dist_comps={}]\n", t, net_sep, m, dist_comps);
 
     my_results["net_sep"] = net_sep;
+    my_results["dist_comps"] = dist_comps;
     my_results["time"] = t;
 
     results["build_greedy_net"] = my_results;
