@@ -70,7 +70,6 @@ IndexVector cells; /* Voronoi cell site for each point */
 RealVector dists; /* distance of each point to its Voronoi site */
 Real net_sep; /* minimum separation of net sites */
 
-IndexMap repids; /* maps Voronoi sites to their slot */
 std::vector<IndexVectorMap> reptree; /* replication tree */
 Index minlevel, maxlevel, root; /* minimum/maximum level of replication tree, and root point id */
 
@@ -78,6 +77,7 @@ TreeMap trees; /* maps Voronoi sites to their "ghost" trees */
 IndexVectorMap treeids, cellids; /* maps net sites to point+ghost_point sets (treeids) and just point sets (cellids) */
 
 IndexVectorVector graph; /* epsilon graph */
+double total_time = 0;
 
 int main(int argc, char *argv[])
 {
@@ -118,9 +118,11 @@ int main(int argc, char *argv[])
     t = -omp_get_wtime();
     PointTraits::read_fvecs(points, points_fname); num_points = points.size();
     t += omp_get_wtime();
+    total_time += t;
 
     fmt::print("[time={:.3f}] read {} points from file '{}'\n", t, num_points, points_fname);
 
+    results["file_io_time"] = t;
     results["dataset"] = points_fname;
     results["num_points"] = num_points;
     results["dim"] = DIM_SIZE;
@@ -168,6 +170,10 @@ int main(int argc, char *argv[])
     results["graph_is_correct"] = correct;
 
 #endif
+
+    results["total_time"] = total_time;
+
+    fmt::print("[total_runtime={:.3f}]\n", total_time);
 
     if (results_fname)
     {
@@ -233,6 +239,7 @@ void build_greedy_net()
     }
 
     t += omp_get_wtime();
+    total_time += t;
 
     fmt::print("[time={:.3f}] built r-net Voronoi diagram [sep={:.3f},num_sites={}]\n", t, net_sep, m);
 
@@ -257,10 +264,7 @@ void build_replication_tree()
     IndexSet C;
 
     for (Index j = 0; j < net.size(); ++j)
-    {
         C.insert(j);
-        repids.insert({net[j], j});
-    }
 
     while (C.size() > 1)
     {
@@ -304,6 +308,7 @@ void build_replication_tree()
     root = it->first;
 
     t += omp_get_wtime();
+    total_time += t;
 
     for (const auto& level : reptree)
         verts += level.size();
@@ -357,8 +362,9 @@ void compute_ghost_points()
     }
 
     t += omp_get_wtime();
+    total_time += t;
 
-    fmt::print("[time={:.3f}] computed ghost points [g={}]\n", t, num_ghost_points);
+    fmt::print("[time={:.3f}] computed ghost points [num_ghost_points={}]\n", t, num_ghost_points);
 
     my_results["num_ghost_points"] = num_ghost_points;
     my_results["time"] = t;
@@ -389,6 +395,7 @@ void build_ghost_trees()
     }
 
     t += omp_get_wtime();
+    total_time += t;
 
     fmt::print("[time={:.3f}] computed ghost trees\n", t);
 
@@ -416,7 +423,7 @@ void build_epsilon_graph()
 
         for (Index u : V_i)
         {
-            T_i.query(points[u], epsilon, graph[u]);
+            T_i.range_query(points[u], epsilon, graph[u]);
             IndexSet tmp(graph[u].begin(), graph[u].end());
             graph[u].assign(tmp.begin(), tmp.end());
             n_edges += graph[u].size();
@@ -424,6 +431,7 @@ void build_epsilon_graph()
     }
 
     t += omp_get_wtime();
+    total_time += t;
 
     fmt::print("[time={:.3f}] built epsilon graph [density={:.3f},edges={}]\n", t, (n_edges+0.0)/points.size(), n_edges);
 

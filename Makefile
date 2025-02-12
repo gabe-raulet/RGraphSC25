@@ -26,11 +26,14 @@ ifeq ($(V),1)
 FLAGS+=-DVERIFY
 endif
 
-all: rgraph
+all: rgraph rgraph_mpi
 
 rgraph: rgraph.cpp
 	$(MPI_COMPILER) -o $@ -DDIM_SIZE=$(D) $(FLAGS) -I./ $<
 
+rgraph_mpi: rgraph_mpi.cpp
+	$(MPI_COMPILER) -o $@ -DDIM_SIZE=$(D) $(FLAGS) -I./ -I./mpienv $<
+
 clean:
-	rm -rf rgraph rgraph_* *.out *.dSYM
+	rm -rf rgraph rgraph_mpi *.out *.dSYM
 

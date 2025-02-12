@@ -1,6 +1,6 @@
 datasets/izbicki15/large
 rgraph
-rgraph_*
+rgraph_mpi
 *.json
 *.swp
 *.out
