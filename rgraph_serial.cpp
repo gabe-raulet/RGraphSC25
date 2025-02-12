@@ -8,6 +8,7 @@ using json = nlohmann::json;
 
 #include "fmt/core.h"
 #include "points.h"
+#include "ctree.h"
 #include <unordered_set>
 #include <unordered_map>
 #include <iostream>
@@ -36,6 +37,9 @@ using RealVector = std::vector<Real>;
 using IndexMap = std::unordered_map<Index, Index>;
 using IndexSet = std::unordered_set<Index>;
 using IndexVectorMap = std::unordered_map<Index, IndexVector>;
+
+using Tree = CoverTree<PointTraits, Distance>;
+using TreeMap = std::unordered_map<Index, Tree>;
 
 PointVector points;
 Index num_points;
@@ -105,6 +109,9 @@ int main(int argc, char *argv[])
     build_greedy_net();
     build_replication_tree();
     compute_ghost_points();
+
+    Tree tree(points);
+    tree.build(covering_factor, leaf_size);
 
     std::ofstream f(results_fname);
     f << std::setw(4) << results << std::endl;
