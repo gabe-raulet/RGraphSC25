@@ -1,0 +1,524 @@
+[time=0.363] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.013] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.002] built replication tree [verts=646,dist_comps=19966]
+[time=0.001] computed cell assignments
+[time=0.226] computed ghost points [num_ghost_points=2802647,dist_comps=78695830]
+[time=0.223] computed ghost trees [dist_comps=486109642]
+[time=0.664] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=303620950]
+[total_runtime=1.492]
+srun: Step created for StepId=35797490.1
+[time=0.019] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.021] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.003] built replication tree [verts=1158,dist_comps=37305]
+[time=0.001] computed cell assignments
+[time=0.340] computed ghost points [num_ghost_points=5153854,dist_comps=148365909]
+[time=0.221] computed ghost trees [dist_comps=861441078]
+[time=0.513] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=285851966]
+[total_runtime=1.119]
+srun: Step created for StepId=35797490.2
+[time=0.019] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.038] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.059] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.001] computed cell assignments
+[time=0.437] computed ghost points [num_ghost_points=9317012,dist_comps=362820751]
+[time=0.222] computed ghost trees [dist_comps=1447838338]
+[time=0.432] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=266099289]
+[total_runtime=1.209]
+[time=0.013] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.011] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.112] computed ghost points [num_ghost_points=2802647,dist_comps=78695830]
+[time=0.227] computed ghost trees [dist_comps=486109642]
+[time=0.674] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=303620950]
+[total_runtime=1.039]
+srun: Step created for StepId=35797490.4
+[time=0.013] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.020] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.002] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=0.144] computed ghost points [num_ghost_points=5153854,dist_comps=148365909]
+[time=0.268] computed ghost trees [dist_comps=861441078]
+[time=0.510] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=285851966]
+[total_runtime=0.958]
+srun: Step created for StepId=35797490.5
+[time=0.012] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.039] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.042] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=0.205] computed ghost points [num_ghost_points=9317012,dist_comps=362820751]
+[time=0.328] computed ghost trees [dist_comps=1447838338]
+[time=0.424] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=266099289]
+[total_runtime=1.050]
+srun: Step created for StepId=35797490.6
+[time=0.009] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.012] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.069] computed ghost points [num_ghost_points=2802647,dist_comps=78695830]
+[time=0.241] computed ghost trees [dist_comps=486109642]
+[time=0.694] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=303620950]
+[total_runtime=1.026]
+[time=0.009] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.023] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.002] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=0.103] computed ghost points [num_ghost_points=5153854,dist_comps=148365909]
+[time=0.307] computed ghost trees [dist_comps=861441078]
+[time=0.582] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=285851966]
+[total_runtime=1.027]
+srun: Step created for StepId=35797490.8
+[time=0.009] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.045] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.042] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=0.221] computed ghost points [num_ghost_points=9317012,dist_comps=362820751]
+[time=0.557] computed ghost trees [dist_comps=1447838338]
+[time=0.433] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=266099289]
+[total_runtime=1.307]
+[time=0.008] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.015] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.071] computed ghost points [num_ghost_points=2802647,dist_comps=78695830]
+[time=0.328] computed ghost trees [dist_comps=486109642]
+[time=1.020] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=303620950]
+[total_runtime=1.444]
+[time=0.009] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.029] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.002] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=0.124] computed ghost points [num_ghost_points=5153854,dist_comps=148365909]
+[time=0.477] computed ghost trees [dist_comps=861441078]
+[time=0.583] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=285851966]
+[total_runtime=1.223]
+srun: Step created for StepId=35797490.11
+[time=0.008] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.056] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.038] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=0.306] computed ghost points [num_ghost_points=9317012,dist_comps=362820751]
+[time=0.836] computed ghost trees [dist_comps=1447838338]
+[time=0.484] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=266099289]
+[total_runtime=1.729]
+srun: Step created for StepId=35797490.12
+[time=0.008] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.023] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.107] computed ghost points [num_ghost_points=2802647,dist_comps=78695830]
+[time=0.481] computed ghost trees [dist_comps=486109642]
+[time=1.187] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=303620950]
+[total_runtime=1.808]
+srun: Step created for StepId=35797490.13
+[time=0.007] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.044] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.001] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=0.193] computed ghost points [num_ghost_points=5153854,dist_comps=148365909]
+[time=0.789] computed ghost trees [dist_comps=861441078]
+[time=0.742] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=285851966]
+[total_runtime=1.776]
+srun: Step created for StepId=35797490.14
+[time=0.007] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.086] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.037] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=0.524] computed ghost points [num_ghost_points=9317012,dist_comps=362820751]
+[time=1.244] computed ghost trees [dist_comps=1447838338]
+[time=0.779] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=266099289]
+[total_runtime=2.677]
+srun: Step created for StepId=35797490.15
+[time=0.007] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.039] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.191] computed ghost points [num_ghost_points=2802647,dist_comps=78695830]
+[time=0.751] computed ghost trees [dist_comps=486109642]
+[time=1.609] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=303620950]
+[total_runtime=2.598]
+srun: Step created for StepId=35797490.16
+[time=0.007] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.076] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.001] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=0.340] computed ghost points [num_ghost_points=5153854,dist_comps=148365909]
+[time=1.171] computed ghost trees [dist_comps=861441078]
+[time=1.224] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=285851966]
+[total_runtime=2.819]
+srun: Step created for StepId=35797490.17
+[time=0.007] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.149] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.037] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=0.946] computed ghost points [num_ghost_points=9317012,dist_comps=362820751]
+[time=2.079] computed ghost trees [dist_comps=1447838338]
+[time=1.276] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=266099289]
+[total_runtime=4.494]
+srun: Step created for StepId=35797490.18
+[time=0.008] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.070] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.335] computed ghost points [num_ghost_points=2802647,dist_comps=78695830]
+[time=1.281] computed ghost trees [dist_comps=486109642]
+[time=2.253] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=303620950]
+[total_runtime=3.948]
+srun: Step created for StepId=35797490.19
+[time=0.008] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.138] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.001] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=0.594] computed ghost points [num_ghost_points=5153854,dist_comps=148365909]
+[time=2.261] computed ghost trees [dist_comps=861441078]
+[time=2.151] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=285851966]
+[total_runtime=5.154]
+srun: Step created for StepId=35797490.20
+[time=0.008] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.271] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.036] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=1.756] computed ghost points [num_ghost_points=9317012,dist_comps=362820751]
+[time=3.813] computed ghost trees [dist_comps=1447838338]
+[time=1.945] built epsilon graph [density=24.040,sparsity=0.000,edges=1635650,dist_comps=266099289]
+[total_runtime=7.830]
+srun: Step created for StepId=35797490.21
+[time=0.018] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.012] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.002] built replication tree [verts=646,dist_comps=19966]
+[time=0.001] computed cell assignments
+[time=0.432] computed ghost points [num_ghost_points=15850067,dist_comps=78721936]
+[time=0.409] computed ghost trees [dist_comps=3872832629]
+[time=2.285] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1051188982]
+[total_runtime=3.160]
+srun: Step created for StepId=35797490.22
+[time=0.019] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.021] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.003] built replication tree [verts=1158,dist_comps=37305]
+[time=0.001] computed cell assignments
+[time=0.527] computed ghost points [num_ghost_points=31367907,dist_comps=148394896]
+[time=0.631] computed ghost trees [dist_comps=7198084710]
+[time=1.640] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1050932519]
+[total_runtime=2.841]
+[time=0.018] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.038] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.042] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.001] computed cell assignments
+[time=0.644] computed ghost points [num_ghost_points=61967439,dist_comps=372281737]
+[time=1.071] computed ghost trees [dist_comps=13244352841]
+[time=1.251] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1032295629]
+[total_runtime=3.065]
+srun: Step created for StepId=35797490.24
+[time=0.012] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.011] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.206] computed ghost points [num_ghost_points=15850067,dist_comps=78721936]
+[time=0.599] computed ghost trees [dist_comps=3872832629]
+[time=2.337] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1051188982]
+[total_runtime=3.166]
+[time=0.012] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.020] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.002] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=0.308] computed ghost points [num_ghost_points=31367907,dist_comps=148394896]
+[time=1.032] computed ghost trees [dist_comps=7198084710]
+[time=1.650] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1050932519]
+[total_runtime=3.024]
+[time=0.012] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.039] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.042] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=0.525] computed ghost points [num_ghost_points=61967439,dist_comps=372281737]
+[time=1.704] computed ghost trees [dist_comps=13244352841]
+[time=1.233] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1032295629]
+[total_runtime=3.555]
+[time=0.010] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.012] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.220] computed ghost points [num_ghost_points=15850067,dist_comps=78721936]
+[time=1.101] computed ghost trees [dist_comps=3872832629]
+[time=2.586] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1051188982]
+[total_runtime=3.930]
+srun: Step created for StepId=35797490.28
+[time=0.010] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.023] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.002] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=0.416] computed ghost points [num_ghost_points=31367907,dist_comps=148394896]
+[time=1.852] computed ghost trees [dist_comps=7198084710]
+[time=1.976] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1050932519]
+[total_runtime=4.278]
+srun: Step created for StepId=35797490.29
+[time=0.009] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.045] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.042] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=0.876] computed ghost points [num_ghost_points=61967439,dist_comps=372281737]
+[time=2.936] computed ghost trees [dist_comps=13244352841]
+[time=1.300] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1032295629]
+[total_runtime=5.207]
+[time=0.008] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.015] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.258] computed ghost points [num_ghost_points=15850067,dist_comps=78721936]
+[time=1.699] computed ghost trees [dist_comps=3872832629]
+[time=3.380] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1051188982]
+[total_runtime=5.362]
+srun: Step created for StepId=35797490.31
+[time=0.009] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.029] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.002] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=0.512] computed ghost points [num_ghost_points=31367907,dist_comps=148394896]
+[time=2.842] computed ghost trees [dist_comps=7198084710]
+[time=2.065] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1050932519]
+[total_runtime=5.459]
+[time=0.009] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.056] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.038] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=1.092] computed ghost points [num_ghost_points=61967439,dist_comps=372281737]
+[time=5.106] computed ghost trees [dist_comps=13244352841]
+[time=1.933] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1032295629]
+[total_runtime=8.234]
+srun: Step created for StepId=35797490.33
+[time=0.008] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.024] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.325] computed ghost points [num_ghost_points=15850067,dist_comps=78721936]
+[time=3.050] computed ghost trees [dist_comps=3872832629]
+[time=4.237] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1051188982]
+[total_runtime=7.644]
+[time=0.007] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.044] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.001] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=0.613] computed ghost points [num_ghost_points=31367907,dist_comps=148394896]
+[time=5.122] computed ghost trees [dist_comps=7198084710]
+[time=2.846] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1050932519]
+[total_runtime=8.633]
+srun: Step created for StepId=35797490.35
+[time=0.008] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.087] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.037] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=1.360] computed ghost points [num_ghost_points=61967439,dist_comps=372281737]
+[time=8.991] computed ghost trees [dist_comps=13244352841]
+[time=2.719] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1032295629]
+[total_runtime=13.200]
+[time=0.007] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.039] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.457] computed ghost points [num_ghost_points=15850067,dist_comps=78721936]
+[time=4.856] computed ghost trees [dist_comps=3872832629]
+[time=5.797] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1051188982]
+[total_runtime=11.157]
+srun: Step created for StepId=35797490.37
+[time=0.008] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.075] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.001] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=0.860] computed ghost points [num_ghost_points=31367907,dist_comps=148394896]
+[time=9.658] computed ghost trees [dist_comps=7198084710]
+[time=4.908] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1050932519]
+[total_runtime=15.511]
+[time=0.007] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.150] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.037] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=2.049] computed ghost points [num_ghost_points=61967439,dist_comps=372281737]
+[time=17.214] computed ghost trees [dist_comps=13244352841]
+[time=5.147] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1032295629]
+[total_runtime=24.605]
+srun: Step created for StepId=35797490.39
+[time=0.008] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.070] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.753] computed ghost points [num_ghost_points=15850067,dist_comps=78721936]
+[time=9.555] computed ghost trees [dist_comps=3872832629]
+[time=8.371] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1051188982]
+[total_runtime=18.757]
+[time=0.008] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.138] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.001] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=1.443] computed ghost points [num_ghost_points=31367907,dist_comps=148394896]
+[time=18.006] computed ghost trees [dist_comps=7198084710]
+[time=8.179] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1050932519]
+[total_runtime=27.775]
+[time=0.009] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.273] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.036] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=3.537] computed ghost points [num_ghost_points=61967439,dist_comps=372281737]
+[time=31.883] computed ghost trees [dist_comps=13244352841]
+[time=8.125] built epsilon graph [density=552.016,sparsity=0.008,edges=37559190,dist_comps=1032295629]
+[total_runtime=43.862]
+srun: Step created for StepId=35797490.42
+[time=0.019] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.012] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.002] built replication tree [verts=646,dist_comps=19966]
+[time=0.001] computed cell assignments
+[time=0.511] computed ghost points [num_ghost_points=28333368,dist_comps=78722280]
+[time=0.513] computed ghost trees [dist_comps=5828065457]
+[time=5.513] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2255075501]
+[total_runtime=6.572]
+srun: Step created for StepId=35797490.43
+[time=0.020] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.022] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.003] built replication tree [verts=1158,dist_comps=37305]
+[time=0.001] computed cell assignments
+[time=0.601] computed ghost points [num_ghost_points=57184817,dist_comps=148395240]
+[time=0.924] computed ghost trees [dist_comps=11153104620]
+[time=3.771] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2257176942]
+[total_runtime=5.341]
+srun: Step created for StepId=35797490.44
+[time=0.019] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.037] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.048] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.001] computed cell assignments
+[time=0.799] computed ghost points [num_ghost_points=114872220,dist_comps=374342633]
+[time=1.469] computed ghost trees [dist_comps=21699863085]
+[time=3.105] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2257589515]
+[total_runtime=5.479]
+srun: Step created for StepId=35797490.45
+[time=0.012] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.011] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.268] computed ghost points [num_ghost_points=28333368,dist_comps=78722280]
+[time=0.835] computed ghost trees [dist_comps=5828065457]
+[time=5.700] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2255075501]
+[total_runtime=6.828]
+[time=0.012] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.020] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.002] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=0.447] computed ghost points [num_ghost_points=57184817,dist_comps=148395240]
+[time=1.405] computed ghost trees [dist_comps=11153104620]
+[time=3.863] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2257176942]
+[total_runtime=5.750]
+[time=0.012] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.038] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.057] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=0.841] computed ghost points [num_ghost_points=114872220,dist_comps=374342633]
+[time=2.505] computed ghost trees [dist_comps=21699863085]
+[time=3.076] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2257589515]
+[total_runtime=6.529]
+srun: Step created for StepId=35797490.48
+[time=0.009] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.012] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.353] computed ghost points [num_ghost_points=28333368,dist_comps=78722280]
+[time=1.414] computed ghost trees [dist_comps=5828065457]
+[time=6.020] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2255075501]
+[total_runtime=7.809]
+srun: Step created for StepId=35797490.49
+[time=0.010] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.023] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.002] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=0.705] computed ghost points [num_ghost_points=57184817,dist_comps=148395240]
+[time=2.511] computed ghost trees [dist_comps=11153104620]
+[time=4.787] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2257176942]
+[total_runtime=8.038]
+srun: Step created for StepId=35797490.50
+[time=0.009] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.044] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.041] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=1.478] computed ghost points [num_ghost_points=114872220,dist_comps=374342633]
+[time=4.581] computed ghost trees [dist_comps=21699863085]
+[time=3.315] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2257589515]
+[total_runtime=9.470]
+[time=0.009] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.015] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.401] computed ghost points [num_ghost_points=28333368,dist_comps=78722280]
+[time=2.226] computed ghost trees [dist_comps=5828065457]
+[time=9.407] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2255075501]
+[total_runtime=12.059]
+srun: Step created for StepId=35797490.52
+[time=0.009] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.029] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.002] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=0.806] computed ghost points [num_ghost_points=57184817,dist_comps=148395240]
+[time=4.085] computed ghost trees [dist_comps=11153104620]
+[time=5.218] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2257176942]
+[total_runtime=10.148]
+srun: Step created for StepId=35797490.53
+[time=0.009] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.057] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.038] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=1.719] computed ghost points [num_ghost_points=114872220,dist_comps=374342633]
+[time=7.965] computed ghost trees [dist_comps=21699863085]
+[time=5.274] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2257589515]
+[total_runtime=15.062]
+srun: Step created for StepId=35797490.54
+[time=0.008] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.023] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.465] computed ghost points [num_ghost_points=28333368,dist_comps=78722280]
+[time=3.945] computed ghost trees [dist_comps=5828065457]
+[time=10.765] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2255075501]
+[total_runtime=15.206]
+srun: Step created for StepId=35797490.55
+[time=0.007] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.044] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.002] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=0.927] computed ghost points [num_ghost_points=57184817,dist_comps=148395240]
+[time=7.366] computed ghost trees [dist_comps=11153104620]
+[time=7.590] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2257176942]
+[total_runtime=15.935]
+srun: Step created for StepId=35797490.56
+[time=0.008] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.086] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.037] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=1.988] computed ghost points [num_ghost_points=114872220,dist_comps=374342633]
+[time=14.315] computed ghost trees [dist_comps=21699863085]
+[time=7.774] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2257589515]
+[total_runtime=24.207]
+srun: Step created for StepId=35797490.57
+[time=0.007] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.039] built r-net Voronoi diagram [sep=0.315,num_sites=512,dist_comps=34836480]
+[time=0.001] built replication tree [verts=646,dist_comps=19966]
+[time=0.000] computed cell assignments
+[time=0.643] computed ghost points [num_ghost_points=28333368,dist_comps=78722280]
+[time=7.455] computed ghost trees [dist_comps=5828065457]
+[time=15.284] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2255075501]
+[total_runtime=23.430]
+srun: Step created for StepId=35797490.58
+[time=0.008] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.076] built r-net Voronoi diagram [sep=0.264,num_sites=1024,dist_comps=69672960]
+[time=0.001] built replication tree [verts=1158,dist_comps=37305]
+[time=0.000] computed cell assignments
+[time=1.282] computed ghost points [num_ghost_points=57184817,dist_comps=148395240]
+[time=13.958] computed ghost trees [dist_comps=11153104620]
+[time=13.564] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2257176942]
+[total_runtime=28.889]
+srun: Step created for StepId=35797490.59
+[time=0.007] read 68040 points from file 'datasets/izbicki15/small/corel.fvecs'
+[time=0.151] built r-net Voronoi diagram [sep=0.222,num_sites=2048,dist_comps=139345920]
+[time=0.037] built replication tree [verts=3458,dist_comps=1235355]
+[time=0.000] computed cell assignments
+[time=2.923] computed ghost points [num_ghost_points=114872220,dist_comps=374342633]
+[time=27.450] computed ghost trees [dist_comps=21699863085]
+[time=15.191] built epsilon graph [density=3914.877,sparsity=0.058,edges=266368224,dist_comps=2257589515]
+[total_runtime=45.758]
+srun: Step created for StepId=35797490.60
+slurmstepd: error: *** STEP 35797490.60 ON nid004241 CANCELLED AT 2025-02-13T05:12:27 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 35797490 ON nid004241 CANCELLED AT 2025-02-13T05:12:27 DUE TO TIME LIMIT ***
