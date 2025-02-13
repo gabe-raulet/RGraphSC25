@@ -1,0 +1,111 @@
+{
+    "corel": {
+        "dataset": "datasets/izbicki15/small/corel.fvecs",
+        "dim": 32,
+        "rgraph": "rgraph_corel",
+        "rgraph_mpi": "rgraph_mpi_corel",
+        "covering_factor": 2.0,
+        "epsilons": [
+            0.1,
+            0.125,
+            0.15,
+            0.175
+        ],
+        "cell_counts": [
+            512,
+            1024,
+            2048
+        ],
+        "num_ranks": [
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+        ],
+        "num_nodes": 4
+    },
+    "faces": {
+        "dataset": "datasets/izbicki15/small/faces.fvecs",
+        "dim": 20,
+        "rgraph": "rgraph_faces",
+        "rgraph_mpi": "rgraph_mpi_faces",
+        "covering_factor": 2.0,
+        "epsilons": [
+            20,
+            40,
+            60,
+            80
+        ],
+        "cell_counts": [
+            16,
+            32,
+            64,
+            128
+        ],
+        "num_ranks": [
+            64,
+            128,
+            256,
+            512
+        ],
+        "num_nodes": 4
+    },
+    "artificial40": {
+        "dataset": "datasets/izbicki15/small/artificial40.fvecs",
+        "dim": 40,
+        "rgraph": "rgraph_artificial40",
+        "rgraph_mpi": "rgraph_mpi_artificial40",
+        "covering_factor": 2.0,
+        "epsilons": [
+            4.5,
+            5.0,
+            5.5,
+            6.0,
+            6.5,
+            7.0
+        ],
+        "cell_counts": [
+            256,
+            512,
+            1024
+        ],
+        "num_ranks": [
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512
+        ],
+        "num_nodes": 4
+    },
+    "mnist": {
+        "dataset": "datasets/izbicki15/large/mnist.fvecs",
+        "dim": 784,
+        "rgraph": "rgraph_mnist",
+        "rgraph_mpi": "rgraph_mpi_mnist",
+        "covering_factor": 1.1,
+        "epsilons": [
+            750,
+            800,
+            850
+        ],
+        "cell_counts": [
+            512,
+            1024,
+            2048
+        ],
+        "num_ranks": [
+            64,
+            128,
+            256,
+            512,
+            1024
+        ],
+        "num_nodes": 8
+    }
+}
