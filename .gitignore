@@ -1,7 +1,5 @@
 datasets/izbicki15/large
 rgraph
 rgraph_mpi
-*.json
 *.swp
-*.out
 *.dSYM

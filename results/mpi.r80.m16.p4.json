@@ -1,0 +1,82 @@
+{
+    "build_epsilon_graph": {
+        "density": 188.45458074534162,
+        "dist_comps": 35025800,
+        "num_edges": 1941836,
+        "rank_dist_comps": [
+            3691582,
+            19640044,
+            10614233,
+            1079941
+        ],
+        "rank_num_edges": [
+            277119,
+            1380025,
+            269946,
+            14746
+        ],
+        "time": 0.3477659259999655
+    },
+    "build_ghost_trees": {
+        "dist_comps": 6735865,
+        "rank_dist_comps": [
+            1211586,
+            1794943,
+            2106232,
+            1623104
+        ],
+        "time": 0.028538204999904337
+    },
+    "build_greedy_net": {
+        "dist_comps": 164864,
+        "net_sep": 281.2472229003906,
+        "rank_dist_comps": [
+            41216,
+            41216,
+            41216,
+            41216
+        ],
+        "time": 0.0006566580000253452
+    },
+    "build_replication_tree": {
+        "dist_comps": 16,
+        "time": 5.181999995329534e-05,
+        "verts": 19
+    },
+    "compute_cell_assignments": {
+        "time": 3.5099992601317354e-07
+    },
+    "compute_ghost_points": {
+        "dist_comps": 350336,
+        "num_ghost_points": 60548,
+        "rank_dist_comps": [
+            87584,
+            87584,
+            87584,
+            87584
+        ],
+        "rank_num_ghost_points_recv": [
+            12687,
+            13657,
+            18546,
+            15658
+        ],
+        "rank_num_ghost_points_sent": [
+            15074,
+            13012,
+            15803,
+            16659
+        ],
+        "time": 0.011339120999991792
+    },
+    "covering_factor": 2.0,
+    "dataset": "datasets/izbicki15/small/faces.fvecs",
+    "dim": 20,
+    "epsilon": 80.0,
+    "file_io_time": 0.00201128300000164,
+    "leaf_size": 10,
+    "num_points": 10304,
+    "num_ranks": 4,
+    "num_sites": 16,
+    "total_time": 0.3903633639997679
+}

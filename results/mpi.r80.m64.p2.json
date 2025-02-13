@@ -1,0 +1,68 @@
+{
+    "build_epsilon_graph": {
+        "density": 188.45458074534162,
+        "dist_comps": 34383841,
+        "num_edges": 1941836,
+        "rank_dist_comps": [
+            15082198,
+            19301643
+        ],
+        "rank_num_edges": [
+            609955,
+            1331881
+        ],
+        "time": 0.34685232199990423
+    },
+    "build_ghost_trees": {
+        "dist_comps": 25671332,
+        "rank_dist_comps": [
+            13833782,
+            11837550
+        ],
+        "time": 0.18662340499986385
+    },
+    "build_greedy_net": {
+        "dist_comps": 659456,
+        "net_sep": 212.1273193359375,
+        "rank_dist_comps": [
+            329728,
+            329728
+        ],
+        "time": 0.003539734000014505
+    },
+    "build_replication_tree": {
+        "dist_comps": 603,
+        "time": 7.292100008271518e-05,
+        "verts": 96
+    },
+    "compute_cell_assignments": {
+        "time": 2.809999841701938e-07
+    },
+    "compute_ghost_points": {
+        "dist_comps": 1638336,
+        "num_ghost_points": 243403,
+        "rank_dist_comps": [
+            819168,
+            819168
+        ],
+        "rank_num_ghost_points_recv": [
+            130950,
+            112453
+        ],
+        "rank_num_ghost_points_sent": [
+            115584,
+            127819
+        ],
+        "time": 0.05388020999998844
+    },
+    "covering_factor": 2.0,
+    "dataset": "datasets/izbicki15/small/faces.fvecs",
+    "dim": 20,
+    "epsilon": 80.0,
+    "file_io_time": 0.0018238110001220775,
+    "leaf_size": 10,
+    "num_points": 10304,
+    "num_ranks": 2,
+    "num_sites": 64,
+    "total_time": 0.59279268399996
+}

@@ -1,0 +1,110 @@
+{
+    "build_epsilon_graph": {
+        "density": 188.45458074534162,
+        "dist_comps": 33055553,
+        "num_edges": 1941836,
+        "rank_dist_comps": [
+            3290011,
+            10329010,
+            2871015,
+            2300363,
+            1064415,
+            3757773,
+            6858363,
+            2584603
+        ],
+        "rank_num_edges": [
+            273841,
+            1014234,
+            80211,
+            42282,
+            12400,
+            141108,
+            295688,
+            82072
+        ],
+        "time": 0.20884261100013646
+    },
+    "build_ghost_trees": {
+        "dist_comps": 50309842,
+        "rank_dist_comps": [
+            5168171,
+            4854035,
+            6343676,
+            6772194,
+            5678444,
+            6202378,
+            8125056,
+            7165888
+        ],
+        "time": 0.10834387399995649
+    },
+    "build_greedy_net": {
+        "dist_comps": 1318912,
+        "net_sep": 179.68026733398438,
+        "rank_dist_comps": [
+            164864,
+            164864,
+            164864,
+            164864,
+            164864,
+            164864,
+            164864,
+            164864
+        ],
+        "time": 0.002272717000096236
+    },
+    "build_replication_tree": {
+        "dist_comps": 995,
+        "time": 0.00012455000000954897,
+        "verts": 160
+    },
+    "compute_cell_assignments": {
+        "time": 5.310000688041328e-07
+    },
+    "compute_ghost_points": {
+        "dist_comps": 2957248,
+        "num_ghost_points": 479393,
+        "rank_dist_comps": [
+            369656,
+            369656,
+            369656,
+            369656,
+            369656,
+            369656,
+            369656,
+            369656
+        ],
+        "rank_num_ghost_points_recv": [
+            49894,
+            46188,
+            62538,
+            62519,
+            59153,
+            57696,
+            75728,
+            65677
+        ],
+        "rank_num_ghost_points_sent": [
+            37487,
+            60095,
+            63004,
+            71956,
+            71114,
+            75498,
+            68660,
+            31579
+        ],
+        "time": 0.03775344900009259
+    },
+    "covering_factor": 2.0,
+    "dataset": "datasets/izbicki15/small/faces.fvecs",
+    "dim": 20,
+    "epsilon": 80.0,
+    "file_io_time": 0.0021582969998235058,
+    "leaf_size": 10,
+    "num_points": 10304,
+    "num_ranks": 8,
+    "num_sites": 128,
+    "total_time": 0.3594960290001836
+}
