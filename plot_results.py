@@ -60,7 +60,7 @@ def read_experiments(results_dir):
     #  data = data.sort_values(by=["epsilon", "num_ranks", "dist_comps"], ascending=[True, True, True])
     return data
 
-def heatmap(data, num_sites):
+def heatmap_sites(data, num_sites):
     df = data[data["num_sites"] == num_sites]
     df = df[["epsilon", "num_ranks", "density", "total_time"]]
     num_ranks = sorted(list(set(df["num_ranks"])))
@@ -86,13 +86,41 @@ def heatmap(data, num_sites):
     ax.set_xlabel("Average neighborhood size")
     return im
 
-results_dir = "results"
+def heatmap_epsilon(data, loc):
+    df = data[["epsilon", "num_ranks", "density", "total_time", "num_sites"]]
+    num_ranks = sorted(list(set(df["num_ranks"])))
+    num_sites = sorted(list(set(df["num_sites"])))
+    epsilons = sorted(list(set(df["epsilon"])))
+    df = df[df["epsilon"] == epsilons[loc]]
+    rows = len(num_ranks)
+    cols = len(num_sites)
+    runtimes = np.zeros((rows, cols), dtype=np.float64)
+    #  densities = [0] * cols
+    for i in range(rows):
+        p = num_ranks[i]
+        for j in range(cols):
+            m = num_sites[j]
+            item = df[(df["num_ranks"] == p) & (df["num_sites"] == m)]
+            runtimes[i,j] = item["total_time"].values[0]
+            #  if i == 0: densities[j] = round(item["density"].values[0], 2)
+    im = ax.imshow(runtimes)
+    ax.set_xticks(range(cols), labels=num_sites, rotation=45)
+    ax.set_yticks(range(rows), labels=num_ranks)
+    for i in range(rows):
+        for j in range(cols):
+            text = ax.text(j, i, round(runtimes[i,j], 2), ha="center", va="center", color="w")
+    ax.set_ylabel("Processor count")
+    ax.set_xlabel("Number of sites")
+    return im
+
+results_dir = "test_results"
 data = read_experiments(results_dir)
 
 fig, ax = plt.subplots()
 
-heatmap(data, 128)
-plt.title(f"Runtime (s) (num_sites={128})")
+#  heatmap_sites(data, 512)
+heatmap_epsilon(data, 2)
+#  plt.title(f"Runtime (s) (num_sites={512})")
 
 plt.plot()
 plt.show()

@@ -43,6 +43,65 @@ void FloatingPointTraits<D>::read_fvecs(PointVector& points, const char *fname)
 }
 
 template <int D>
+void FloatingPointTraits<D>::read_fvecs(PointVector& mypoints, Index& myoffset, Index& totsize, const char *fname)
+{
+    auto comm = Comm::world();
+
+    PointRecord record;
+    size_t b[2];
+    int dim;
+
+    size_t& filesize = b[0], &n = b[1];
+
+    if (!comm.rank())
+    {
+        std::ifstream is;
+        is.open(fname, std::ios::binary | std::ios::in);
+
+        is.seekg(0, is.end);
+        filesize = is.tellg();
+        is.seekg(0, is.beg);
+
+        is.read((char*)&dim, sizeof(int)); assert((dim == D));
+        is.close();
+
+        assert((filesize % sizeof(PointRecord)) == 0);
+        n = filesize / sizeof(PointRecord);
+    }
+
+    comm.bcast(b, 0);
+    dim = D;
+
+    IndexVector counts(comm.size()), displs(comm.size());
+    get_balanced_counts(counts, n);
+
+    std::exclusive_scan(counts.begin(), counts.end(), displs.begin(), static_cast<Index>(0));
+
+    Index mysize = counts[comm.rank()];
+    myoffset = displs[comm.rank()];
+    totsize = n;
+
+    std::vector<char> mybuf(mysize * sizeof(PointRecord));
+
+    MPI_File fh;
+    MPI_File_open(comm.getcomm(), fname, MPI_MODE_RDONLY, MPI_INFO_NULL, &fh);
+
+    MPI_Offset fileoffset = myoffset * sizeof(PointRecord);
+    MPI_File_read_at_all(fh, fileoffset, mybuf.data(), static_cast<int>(mybuf.size()), MPI_CHAR, MPI_STATUS_IGNORE);
+    MPI_File_close(&fh);
+
+    mypoints.resize(mysize);
+    char *ptr = mybuf.data();
+
+    for (Index i = 0; i < mysize; ++i)
+    {
+        std::memcpy(record.data(), ptr, sizeof(PointRecord));
+        unpack_point(record, mypoints[i]);
+        ptr += sizeof(PointRecord);
+    }
+}
+
+template <int D>
 struct L2Distance<FloatingPointTraits<D>>
 {
     using PointTraits = FloatingPointTraits<D>;

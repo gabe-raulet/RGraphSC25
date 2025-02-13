@@ -63,6 +63,7 @@ Index leaf_size = 10; /* min leaf size */
 /* void parse_arguments(int argc, char *argv[], const Comm& comm); */
 /* bool check_graph(); */
 
+void read_points(); /* read points file */
 void build_greedy_net(); /* build Voronoi diagram */
 void build_replication_tree(); /* build replication tree on Voronoi sites */
 void compute_cell_assignments(); /* compute cell assignments to processors */
@@ -142,43 +143,10 @@ int main_mpi(int argc, char *argv[])
     num_sites = atoi(argv[optind++]);
     epsilon = atof(argv[optind]);
 
-    auto timer = comm.get_timer();
-    timer.start_timer();
-
-    {
-        /*
-         * TODO: Parallelize this to fix memory issues for large point clouds
-         */
-
-        PointVector points;
-        std::vector<int> sendcounts;
-
-        if (!comm.rank())
-        {
-            PointTraits::read_fvecs(points, points_fname);
-            totsize = points.size();
-
-            sendcounts.resize(comm.size());
-            get_balanced_counts(sendcounts, (size_t)totsize);
-        }
-
-        comm.bcast(totsize, 0);
-
-        comm.scatterv(points, sendcounts, mypoints, 0);
-        mysize = mypoints.size();
-
-        comm.exscan(mysize, myoffset, MPI_SUM, static_cast<Index>(0));
-    }
-
-    timer.stop_timer();
-    double t = timer.get_max_time();
-    total_time += t;
-
-    if (!comm.rank()) fmt::print("[time={:.3f}] read {} points from file '{}'\n", t, totsize, points_fname);
+    read_points();
 
     MPI_Op_create(&mpi_argmax, 1, &MPI_ARGMAX);
 
-    results["file_io_time"] = t;
     results["dataset"] = points_fname;
     results["num_points"] = totsize;
     results["num_sites"] = num_sites;
@@ -680,4 +648,20 @@ Index range_query(IndexVector& neighbors, Point query, Real radius)
     }
 
     return dist_comps;
+}
+
+void read_points()
+{
+    auto comm = Comm::world();
+    auto timer = comm.get_timer();
+    double t;
+
+    timer.start_timer();
+    PointTraits::read_fvecs(mypoints, myoffset, totsize, points_fname);
+    timer.stop_timer();
+
+    t = timer.get_max_time();
+
+    if (!comm.rank()) fmt::print("[time={:.3f}] read {} points from file '{}'\n", t, totsize, points_fname);
+    results["file_io_time"] = t;
 }
