@@ -25,10 +25,10 @@ endif
 
 all: rgraph rgraph_mpi
 
-rgraph: rgraph.cpp
+rgraph: rgraph.cpp include
 	$(MPI_COMPILER) -o $@ -DDIM_SIZE=$(D) $(FLAGS) $(INCS) $<
 
-rgraph_mpi: rgraph_mpi.cpp
+rgraph_mpi: rgraph_mpi.cpp include
 	$(MPI_COMPILER) -o $@ -DDIM_SIZE=$(D) $(FLAGS) $(INCS) $<
 
 clean:
