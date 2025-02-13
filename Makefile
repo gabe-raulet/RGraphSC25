@@ -3,6 +3,7 @@ LOG?=0
 D?=20
 V?=0
 FLAGS=-std=c++20 -fopenmp
+INCS=-I./ -I./include
 
 ifeq ($(shell uname -s),Linux)
 COMPILER=CC
@@ -18,10 +19,6 @@ else
 FLAGS+=-O2
 endif
 
-ifeq ($(LOG),1)
-FLAGS+=-DLOG
-endif
-
 ifeq ($(V),1)
 FLAGS+=-DVERIFY
 endif
@@ -29,10 +26,10 @@ endif
 all: rgraph rgraph_mpi
 
 rgraph: rgraph.cpp
-	$(MPI_COMPILER) -o $@ -DDIM_SIZE=$(D) $(FLAGS) -I./ $<
+	$(MPI_COMPILER) -o $@ -DDIM_SIZE=$(D) $(FLAGS) $(INCS) $<
 
 rgraph_mpi: rgraph_mpi.cpp
-	$(MPI_COMPILER) -o $@ -DDIM_SIZE=$(D) $(FLAGS) -I./ -I./mpienv $<
+	$(MPI_COMPILER) -o $@ -DDIM_SIZE=$(D) $(FLAGS) $(INCS) $<
 
 clean:
 	rm -rf rgraph rgraph_mpi *.out *.dSYM
