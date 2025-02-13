@@ -447,9 +447,14 @@ void build_epsilon_graph()
     t += omp_get_wtime();
     total_time += t;
 
-    fmt::print("[time={:.3f}] built epsilon graph [density={:.3f},edges={},dist_comps={}]\n", t, (n_edges+0.0)/points.size(), n_edges, dist_comps);
+    Index n = points.size();
+    Real density = (n_edges+0.0)/n;
+    Real sparsity = density / n;
 
-    my_results["density"] = (n_edges+0.0)/points.size();
+    fmt::print("[time={:.3f}] built epsilon graph [density={:.3f},sparsity={:.3f},edges={},dist_comps={}]\n", t, density, sparsity, n_edges, dist_comps);
+
+    my_results["density"] = density;
+    my_results["sparsity"] = sparsity;
     my_results["num_edges"] = n_edges;
     my_results["dist_comps"] = dist_comps;
     my_results["time"] = t;

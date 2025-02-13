@@ -608,6 +608,8 @@ void build_epsilon_graph()
     Index dist_comps;
     IndexVector rank_dist_comps;
 
+    Real density, sparsity;
+
     comm.gather(my_dist_comps, rank_dist_comps, 0);
 
     if (!comm.rank())
@@ -615,10 +617,14 @@ void build_epsilon_graph()
         dist_comps = std::accumulate(rank_dist_comps.begin(), rank_dist_comps.end(), static_cast<Index>(0));
         n_edges = std::accumulate(rank_n_edges.begin(), rank_n_edges.end(), static_cast<Index>(0));
 
-        fmt::print("[time={:.3f}] built epsilon graph [density={:.3f},edges={},dist_comps={}]\n", t, (n_edges+0.0)/totsize, n_edges, dist_comps);
+        density = (n_edges+0.0)/totsize;
+        sparsity = density / totsize;
+
+        fmt::print("[time={:.3f}] built epsilon graph [density={:.3f},sparsity={:.3f},edges={},dist_comps={}]\n", t, density, sparsity, n_edges, dist_comps);
     }
 
-    my_results["density"] = (n_edges+0.0)/totsize;
+    my_results["density"] = density;
+    my_results["sparsity"] = sparsity;
     my_results["num_edges"] = n_edges;
     my_results["rank_num_edges"] = rank_n_edges;
     my_results["dist_comps"] = dist_comps;
