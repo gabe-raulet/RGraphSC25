@@ -45,33 +45,60 @@ void FloatingPointTraits<D>::read_fvecs(PointVector& points, const char *fname)
 template <int D>
 void FloatingPointTraits<D>::read_fvecs(PointVector& mypoints, Index& myoffset, Index& totsize, const char *fname)
 {
-    /*
-     * TODO: Parallelize this to fix memory issues for large point clouds
-     */
-
     auto comm = Comm::world();
-    auto timer = comm.get_timer();
 
-    timer.start_timer();
+    PointRecord record;
+    size_t b[2];
+    int dim;
 
-    PointVector points;
-    std::vector<int> sendcounts;
+    size_t& filesize = b[0], &n = b[1];
 
     if (!comm.rank())
     {
-        read_fvecs(points, fname);
-        totsize = points.size();
+        std::ifstream is;
+        is.open(fname, std::ios::binary | std::ios::in);
 
-        sendcounts.resize(comm.size());
-        get_balanced_counts(sendcounts, (size_t)totsize);
+        is.seekg(0, is.end);
+        filesize = is.tellg();
+        is.seekg(0, is.beg);
+
+        is.read((char*)&dim, sizeof(int)); assert((dim == D));
+        is.close();
+
+        assert((filesize % sizeof(PointRecord)) == 0);
+        n = filesize / sizeof(PointRecord);
     }
 
-    comm.bcast(totsize, 0);
+    comm.bcast(b, 0);
+    dim = D;
 
-    comm.scatterv(points, sendcounts, mypoints, 0);
+    IndexVector counts(comm.size()), displs(comm.size());
+    get_balanced_counts(counts, n);
 
-    Index mysize = mypoints.size();
-    comm.exscan(mysize, myoffset, MPI_SUM, static_cast<Index>(0));
+    std::exclusive_scan(counts.begin(), counts.end(), displs.begin(), static_cast<Index>(0));
+
+    Index mysize = counts[comm.rank()];
+    myoffset = displs[comm.rank()];
+    totsize = n;
+
+    std::vector<char> mybuf(mysize * sizeof(PointRecord));
+
+    MPI_File fh;
+    MPI_File_open(comm.getcomm(), fname, MPI_MODE_RDONLY, MPI_INFO_NULL, &fh);
+
+    MPI_Offset fileoffset = myoffset * sizeof(PointRecord);
+    MPI_File_read_at_all(fh, fileoffset, mybuf.data(), static_cast<int>(mybuf.size()), MPI_CHAR, MPI_STATUS_IGNORE);
+    MPI_File_close(&fh);
+
+    mypoints.resize(mysize);
+    char *ptr = mybuf.data();
+
+    for (Index i = 0; i < mysize; ++i)
+    {
+        std::memcpy(record.data(), ptr, sizeof(PointRecord));
+        unpack_point(record, mypoints[i]);
+        ptr += sizeof(PointRecord);
+    }
 }
 
 template <int D>

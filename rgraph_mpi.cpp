@@ -654,15 +654,14 @@ void read_points()
 {
     auto comm = Comm::world();
     auto timer = comm.get_timer();
+    double t;
 
     timer.start_timer();
     PointTraits::read_fvecs(mypoints, myoffset, totsize, points_fname);
     timer.stop_timer();
 
-    double t = timer.get_max_time();
-    total_time += t;
+    t = timer.get_max_time();
 
     if (!comm.rank()) fmt::print("[time={:.3f}] read {} points from file '{}'\n", t, totsize, points_fname);
-
     results["file_io_time"] = t;
 }
