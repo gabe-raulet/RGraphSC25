@@ -86,13 +86,13 @@ def heatmap(data, num_sites):
     ax.set_xlabel("Average neighborhood size")
     return im
 
-results_dir = "results"
+results_dir = "corel_results"
 data = read_experiments(results_dir)
 
 fig, ax = plt.subplots()
 
-heatmap(data, 128)
-plt.title(f"Runtime (s) (num_sites={128})")
+heatmap(data, 2048)
+plt.title(f"Runtime (s) (num_sites={1024})")
 
 plt.plot()
 plt.show()

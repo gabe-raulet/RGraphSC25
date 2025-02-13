@@ -63,6 +63,7 @@ Index leaf_size = 10; /* min leaf size */
 /* void parse_arguments(int argc, char *argv[], const Comm& comm); */
 /* bool check_graph(); */
 
+void read_points(); /* read points file */
 void build_greedy_net(); /* build Voronoi diagram */
 void build_replication_tree(); /* build replication tree on Voronoi sites */
 void compute_cell_assignments(); /* compute cell assignments to processors */
@@ -142,43 +143,10 @@ int main_mpi(int argc, char *argv[])
     num_sites = atoi(argv[optind++]);
     epsilon = atof(argv[optind]);
 
-    auto timer = comm.get_timer();
-    timer.start_timer();
-
-    {
-        /*
-         * TODO: Parallelize this to fix memory issues for large point clouds
-         */
-
-        PointVector points;
-        std::vector<int> sendcounts;
-
-        if (!comm.rank())
-        {
-            PointTraits::read_fvecs(points, points_fname);
-            totsize = points.size();
-
-            sendcounts.resize(comm.size());
-            get_balanced_counts(sendcounts, (size_t)totsize);
-        }
-
-        comm.bcast(totsize, 0);
-
-        comm.scatterv(points, sendcounts, mypoints, 0);
-        mysize = mypoints.size();
-
-        comm.exscan(mysize, myoffset, MPI_SUM, static_cast<Index>(0));
-    }
-
-    timer.stop_timer();
-    double t = timer.get_max_time();
-    total_time += t;
-
-    if (!comm.rank()) fmt::print("[time={:.3f}] read {} points from file '{}'\n", t, totsize, points_fname);
+    read_points();
 
     MPI_Op_create(&mpi_argmax, 1, &MPI_ARGMAX);
 
-    results["file_io_time"] = t;
     results["dataset"] = points_fname;
     results["num_points"] = totsize;
     results["num_sites"] = num_sites;
@@ -188,25 +156,25 @@ int main_mpi(int argc, char *argv[])
     results["epsilon"] = epsilon;
     results["num_ranks"] = comm.size();
 
-    build_greedy_net();
-    build_replication_tree();
-    compute_cell_assignments();
-    compute_ghost_points();
-    build_ghost_trees();
-    build_epsilon_graph();
+    //build_greedy_net();
+    //build_replication_tree();
+    //compute_cell_assignments();
+    //compute_ghost_points();
+    //build_ghost_trees();
+    //build_epsilon_graph();
 
     MPI_Op_free(&MPI_ARGMAX);
 
-    results["total_time"] = total_time;
+    //results["total_time"] = total_time;
 
-    if (!comm.rank()) fmt::print("[total_runtime={:.3f}]\n", total_time);
+    //if (!comm.rank()) fmt::print("[total_runtime={:.3f}]\n", total_time);
 
-    if (results_fname && !comm.rank())
-    {
-        std::ofstream f(results_fname);
-        f << std::setw(4) << results << std::endl;
-        f.close();
-    }
+    //if (results_fname && !comm.rank())
+    //{
+    //    std::ofstream f(results_fname);
+    //    f << std::setw(4) << results << std::endl;
+    //    f.close();
+    //}
 
     return 0;
 }
@@ -680,4 +648,43 @@ Index range_query(IndexVector& neighbors, Point query, Real radius)
     }
 
     return dist_comps;
+}
+
+void read_points()
+{
+    /*
+     * TODO: Parallelize this to fix memory issues for large point clouds
+     */
+
+    auto comm = Comm::world();
+    auto timer = comm.get_timer();
+
+    timer.start_timer();
+
+    PointVector points;
+    std::vector<int> sendcounts;
+
+    if (!comm.rank())
+    {
+        PointTraits::read_fvecs(points, points_fname);
+        totsize = points.size();
+
+        sendcounts.resize(comm.size());
+        get_balanced_counts(sendcounts, (size_t)totsize);
+    }
+
+    comm.bcast(totsize, 0);
+
+    comm.scatterv(points, sendcounts, mypoints, 0);
+    mysize = mypoints.size();
+
+    comm.exscan(mysize, myoffset, MPI_SUM, static_cast<Index>(0));
+
+    timer.stop_timer();
+    double t = timer.get_max_time();
+    total_time += t;
+
+    if (!comm.rank()) fmt::print("[time={:.3f}] read {} points from file '{}'\n", t, totsize, points_fname);
+
+    results["file_io_time"] = t;
 }
