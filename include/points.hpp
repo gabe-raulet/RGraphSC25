@@ -43,6 +43,38 @@ void FloatingPointTraits<D>::read_fvecs(PointVector& points, const char *fname)
 }
 
 template <int D>
+void FloatingPointTraits<D>::read_fvecs(PointVector& mypoints, Index& myoffset, Index& totsize, const char *fname)
+{
+    /*
+     * TODO: Parallelize this to fix memory issues for large point clouds
+     */
+
+    auto comm = Comm::world();
+    auto timer = comm.get_timer();
+
+    timer.start_timer();
+
+    PointVector points;
+    std::vector<int> sendcounts;
+
+    if (!comm.rank())
+    {
+        read_fvecs(points, fname);
+        totsize = points.size();
+
+        sendcounts.resize(comm.size());
+        get_balanced_counts(sendcounts, (size_t)totsize);
+    }
+
+    comm.bcast(totsize, 0);
+
+    comm.scatterv(points, sendcounts, mypoints, 0);
+
+    Index mysize = mypoints.size();
+    comm.exscan(mysize, myoffset, MPI_SUM, static_cast<Index>(0));
+}
+
+template <int D>
 struct L2Distance<FloatingPointTraits<D>>
 {
     using PointTraits = FloatingPointTraits<D>;
