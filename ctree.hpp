@@ -1,5 +1,5 @@
 template <class CoverTree_>
-Hub<CoverTree_>::Hub(const PointVector& points, Index myoffset, Point repr_pt)
+Hub<CoverTree_>::Hub(const PointVector& points, Index myoffset, Point repr_pt, Index& dist_comps)
     : leaders({0}),
       hub_size(points.size()),
       representative(0),
@@ -18,6 +18,8 @@ Hub<CoverTree_>::Hub(const PointVector& points, Index myoffset, Point repr_pt)
         if (hub_points[id].dist > hub_points[candidate].dist)
             candidate = id;
     }
+
+    dist_comps += hub_size;
 
     hub_radius = hub_sep = hub_points[candidate].dist;
     candidate_point = points[candidate];
@@ -39,7 +41,7 @@ Hub<CoverTree_>::Hub(const HubPointVector& hub_points, Index representative, Ind
       active(true) {}
 
 template <class CoverTree_>
-void Hub<CoverTree_>::add_new_leader(const PointVector& points)
+void Hub<CoverTree_>::add_new_leader(const PointVector& points, Index& dist_comps)
 {
     Index n = localsize();
     Index a = localoffset();
@@ -67,6 +69,8 @@ void Hub<CoverTree_>::add_new_leader(const PointVector& points)
             hub_sep = dist;
         }
     }
+
+    dist_comps += n;
 
     candidate_point = points[candidate-a]; // update candidate point
 }
@@ -163,18 +167,20 @@ Hub<CoverTree_>::add_hub_vertex(BallTree& tree)
 
 
 template <class PointTraits_, class Distance_>
-void CoverTree<PointTraits_, Distance_>::build(Real covering_factor, Index leaf_size)
+typename CoverTree<PointTraits_, Distance_>::Index
+CoverTree<PointTraits_, Distance_>::build(Real covering_factor, Index leaf_size)
 {
     using Hub = Hub<CoverTree>;
     using HubVector = typename Hub::HubVector;
 
     Index size = points.size();
+    Index dist_comps = 0;
 
     Index leaf_count, num_hubs;
     HubVector hubs;
     BallTree balltree;
 
-    hubs.emplace_back(points);
+    hubs.emplace_back(points, dist_comps);
 
     leaf_count = 0;
     std::vector<bool> leaf_flags(size, false);
@@ -190,7 +196,7 @@ void CoverTree<PointTraits_, Distance_>::build(Real covering_factor, Index leaf_
         {
             Hub& hub = hubs[i];
 
-            do { hub.add_new_leader(points); } while (!hub.is_split(1./covering_factor));
+            do { hub.add_new_leader(points, dist_comps); } while (!hub.is_split(1./covering_factor));
 
             hub.split_leaders(points);
             hub.find_leaves(leaf_size);
@@ -209,6 +215,8 @@ void CoverTree<PointTraits_, Distance_>::build(Real covering_factor, Index leaf_
     auto itemizer = [&](const Ball& ball) -> PointBall { return {points[ball.id], ball.id, ball.radius}; };
 
     balltree.itemize_new_tree(tree, itemizer);
+
+    return dist_comps;
 }
 
 template <class PointTraits_, class Distance_>

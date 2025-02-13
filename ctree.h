@@ -32,7 +32,7 @@ class CoverTree
         CoverTree(const PointVector& points) : points(points) {}
         CoverTree(const PointVector& points, const IndexVector& globids) : points(points), globids(globids) {}
 
-        void build(Real covering_factor, Index leaf_size);
+        Index build(Real covering_factor, Index leaf_size);
         Index range_query(const Point& query, Real radius, IndexVector& neighbors) const;
 
         struct Ball {Index id; Real radius; };
@@ -87,7 +87,7 @@ class Hub
         using HubVector = std::vector<Hub>;
         using HubPointVector = std::vector<HubPoint>;
 
-        Hub(const PointVector& points) : Hub(points, 0, points.front()) {}
+        Hub(const PointVector& points, Index& dist_comps) : Hub(points, 0, points.front(), dist_comps) {}
         Hub(const HubPointVector& hub_points, Index representative, Index candidate, Point candidate_point, Index parent, Real radius);
 
         Index size() const { return hub_size; }
@@ -101,7 +101,7 @@ class Hub
         const HubPointVector& get_hub_points() const { return hub_points; }
         const IndexVector& get_leaves() const { return leaves; }
 
-        void add_new_leader(const PointVector& points);
+        void add_new_leader(const PointVector& points, Index& dist_comps);
         void split_leaders(const PointVector& points);
         void find_leaves(Index min_hub_size);
 
@@ -110,7 +110,7 @@ class Hub
 
     private:
 
-        Hub(const PointVector& points, Index myoffset, Point repr_pt);
+        Hub(const PointVector& points, Index myoffset, Point repr_pt, Index& dist_comps);
 
         IndexVector leaders; /* point ids of hub leaders */
         HubPointVector hub_points; /* indices, leader pointers and leader distances of hub points */

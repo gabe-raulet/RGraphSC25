@@ -387,6 +387,7 @@ void build_ghost_trees()
     json my_results;
 
     double t;
+    Index dist_comps = 0;
 
     t = -omp_get_wtime();
 
@@ -401,15 +402,16 @@ void build_ghost_trees()
             pts.push_back(points[ids[i]]);
 
         trees.insert({p_i, Tree(pts, ids)});
-        trees.at(p_i).build(covering_factor, leaf_size);
+        dist_comps += trees.at(p_i).build(covering_factor, leaf_size);
     }
 
     t += omp_get_wtime();
     total_time += t;
 
-    fmt::print("[time={:.3f}] computed ghost trees\n", t);
+    fmt::print("[time={:.3f}] computed ghost trees [dist_comps={}]\n", t, dist_comps);
 
     my_results["time"] = t;
+    my_results["dist_comps"] = dist_comps;
     results["build_ghost_trees"] = my_results;
 }
 

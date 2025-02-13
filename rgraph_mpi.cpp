@@ -537,22 +537,35 @@ void build_ghost_trees()
     auto timer = comm.get_timer();
     timer.start_timer();
 
+    Index my_dist_comps = 0;
+
     for (const auto& [p_i, V_i] : mycellids)
     {
         const IndexVector& ids = mytreeids.at(p_i);
         const PointVector& pts = mytreepts.at(p_i);
 
         mytrees.insert({p_i, Tree(pts, ids)});
-        mytrees.at(p_i).build(covering_factor, leaf_size);
+        my_dist_comps += mytrees.at(p_i).build(covering_factor, leaf_size);
     }
 
     timer.stop_timer();
     double t = timer.get_max_time();
     total_time += t;
 
-    if (!comm.rank()) fmt::print("[time={:.3f}] computed ghost trees\n", t);
+    Index dist_comps;
+    IndexVector rank_dist_comps;
+
+    comm.gather(my_dist_comps, rank_dist_comps, 0);
+
+    if (!comm.rank())
+    {
+        dist_comps = std::accumulate(rank_dist_comps.begin(), rank_dist_comps.end(), static_cast<Index>(0));
+        fmt::print("[time={:.3f}] computed ghost trees [dist_comps={}]\n", t, dist_comps);
+    }
 
     my_results["time"] = t;
+    my_results["dist_comps"] = dist_comps;
+    my_results["rank_dist_comps"] = rank_dist_comps;
     results["build_ghost_trees"] = my_results;
 }
 
