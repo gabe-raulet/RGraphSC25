@@ -1,0 +1,83 @@
+{
+    "build_epsilon_graph": {
+        "density": 188.45457458496094,
+        "dist_comps": 33055553,
+        "num_edges": 1941836,
+        "rank_dist_comps": [
+            4354426,
+            14086783,
+            9729378,
+            4884966
+        ],
+        "rank_num_edges": [
+            286241,
+            1155342,
+            375899,
+            124354
+        ],
+        "sparsity": 0.018289458006620407,
+        "time": 0.2594499159999941
+    },
+    "build_ghost_trees": {
+        "dist_comps": 50309842,
+        "rank_dist_comps": [
+            10846615,
+            11056413,
+            14468732,
+            13938082
+        ],
+        "time": 0.18533803700006501
+    },
+    "build_greedy_net": {
+        "dist_comps": 1318912,
+        "net_sep": 179.68026733398438,
+        "rank_dist_comps": [
+            329728,
+            329728,
+            329728,
+            329728
+        ],
+        "time": 0.0037704040000789973
+    },
+    "build_replication_tree": {
+        "dist_comps": 995,
+        "time": 0.00012427000001480337,
+        "verts": 160
+    },
+    "compute_cell_assignments": {
+        "time": 2.6311000056011835e-05
+    },
+    "compute_ghost_points": {
+        "dist_comps": 2957248,
+        "num_ghost_points": 479393,
+        "rank_dist_comps": [
+            739312,
+            739312,
+            739312,
+            739312
+        ],
+        "rank_num_ghost_points_recv": [
+            109047,
+            103884,
+            138266,
+            128196
+        ],
+        "rank_num_ghost_points_sent": [
+            97582,
+            134960,
+            146612,
+            100239
+        ],
+        "time": 0.05523706500002845
+    },
+    "covering_factor": 2.0,
+    "dataset": "datasets/izbicki15/small/faces.fvecs",
+    "dim": 20,
+    "epsilon": 80.0,
+    "file_io_time": 0.0030587260000629612,
+    "leaf_size": 10,
+    "num_points": 10304,
+    "num_ranks": 4,
+    "num_sites": 128,
+    "total_time": 0.5039460030002374
+}
