@@ -12,6 +12,7 @@ using json = nlohmann::json;
 #include "mpienv.h"
 #include <unordered_set>
 #include <unordered_map>
+#include <iomanip>
 #include <iostream>
 #include <vector>
 #include <random>
