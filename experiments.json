@@ -102,5 +102,65 @@
             512
         ],
         "num_nodes": 4
+    },
+    "covtype": {
+        "dataset": "datasets/izbicki15/large/covtype.fvecs",
+        "dim": 55,
+        "rgraph": "rgraph_covtype",
+        "rgraph_mpi": "rgraph_mpi_covtype",
+        "covering_factor": 1.3,
+        "epsilons": [
+            100,
+            200,
+            300,
+            400
+        ],
+        "cell_counts": [
+            1024
+        ],
+        "num_ranks": [
+            512
+        ],
+        "num_nodes": 4
+    },
+    "twitter": {
+        "dataset": "datasets/izbicki15/large/twitter.fvecs",
+        "dim": 78,
+        "rgraph": "rgraph_twitter",
+        "rgraph_mpi": "rgraph_mpi_twitter",
+        "covering_factor": 1.3,
+        "epsilons": [
+            100,
+            200,
+            300,
+            400
+        ],
+        "cell_counts": [
+            1024
+        ],
+        "num_ranks": [
+            512
+        ],
+        "num_nodes": 4
+    },
+    "tinyImages100k": {
+        "dataset": "datasets/izbicki15/large/tinyImages100k.fvecs",
+        "dim": 384,
+        "rgraph": "rgraph_tinyImages100k",
+        "rgraph_mpi": "rgraph_mpi_tinyImages100k",
+        "covering_factor": 1.3,
+        "epsilons": [
+            100,
+            200,
+            300,
+            400
+        ],
+        "cell_counts": [
+            1024
+        ],
+        "num_ranks": [
+            512
+        ],
+        "num_nodes": 4
     }
 }
