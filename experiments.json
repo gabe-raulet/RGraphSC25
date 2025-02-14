@@ -90,22 +90,17 @@
         "rgraph_mpi": "rgraph_mpi_mnist",
         "covering_factor": 1.1,
         "epsilons": [
-            750,
             800,
-            850
+            825,
+            850,
+            875
         ],
         "cell_counts": [
-            512,
-            1024,
-            2048
-        ],
-        "num_ranks": [
-            64,
-            128,
-            256,
-            512,
             1024
         ],
-        "num_nodes": 8
+        "num_ranks": [
+            512
+        ],
+        "num_nodes": 4
     }
 }

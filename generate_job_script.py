@@ -46,6 +46,8 @@ def main(experiments_json, results_dir, minutes, dataset_choices):
         script += f"    done\n"
         script += f"done\n\n"
 
+    script += f"tar cvzf {results_dir}.tar.gz {results_dir}\n"
+
     sys.stdout.write(script)
     sys.stdout.flush()
 
