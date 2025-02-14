@@ -5,6 +5,12 @@ izbicki15/small/corel.fvecs - (68040, 32)
 izbicki15/small/faces.fvecs - (10304, 20)
 
 izbicki15/large/covtype.fvecs - (581012, 55)
+
+    * epsilon=100; edges=16396092; density=28.22; sparsity=4.85e-5;
+    * epsilon=200; edges=157365576; density=270.85; sparsity=0.00047;
+    * epsilon=300; edges=772129302; density=1328.94; sparsity=0.0023;
+    * epsilon=400; edges=2438880022; density=4197.64; sparsity=0.0072;
+
 izbicki15/large/mnist.fvecs - (70000, 784)
 izbicki15/large/tinyImages100k.fvecs - (100000, 384)
 izbicki15/large/twitter.fvecs - (583250, 78)
