@@ -81,7 +81,7 @@ def heatmap_sites(data, num_sites, ax):
     ax.set_yticks(range(rows), labels=num_ranks)
     for i in range(rows):
         for j in range(cols):
-            text = ax.text(j, i, round(runtimes[i,j], 2), ha="center", va="center", color="w")
+            text = ax.text(j, i, round(runtimes[i,j], 3), ha="center", va="center", color="w")
     ax.set_xlabel("Average neighborhood size")
     ax.set_ylabel("Processor count")
     return im
@@ -106,7 +106,7 @@ def heatmap_epsilon(data, loc, ax):
     ax.set_yticks(range(rows), labels=num_ranks)
     for i in range(rows):
         for j in range(cols):
-            text = ax.text(j, i, round(runtimes[i,j], 2), ha="center", va="center", color="w")
+            text = ax.text(j, i, round(runtimes[i,j], 3), ha="center", va="center", color="w")
     ax.set_ylabel("Processor count")
     ax.set_xlabel("Number of sites")
     return im
@@ -120,7 +120,7 @@ for m in [32, 64, 128]:
     heatmap_sites(data, m, ax)
     plt.title(f"Runtime (s) (num_sites={m})")
     plt.plot()
-    plt.savefig(f"faces.m{m}.png", format="png", dpi=1000)
+    plt.savefig(f"faces.m{m}.png", format="png", dpi=1000, bbox_inches="tight")
     ax.cla()
 
 epsilons = sorted(list(set(data["epsilon"])))
@@ -131,6 +131,6 @@ for i in range(len(epsilons)):
     heatmap_epsilon(data, i, ax)
     plt.title(f"Runtime (s) (density={densities[i]:.3f})")
     plt.plot()
-    plt.savefig(f"faces.r{r}.png", format="png", dpi=1000)
+    plt.savefig(f"faces.r{r}.png", format="png", dpi=1000, bbox_inches="tight")
     ax.cla()
 
